@@ -1,0 +1,53 @@
+{
+  "Character": {
+    "CurrentArea": "MeadowField",
+    "CurrentHP": 100,
+    "Name": "Kael",
+    "Gender": "Female",
+    "Height": 176,
+    "Weight": 77,
+    "BodyType": "Athletic",
+    "Profession": "Warrior",
+    "Likes": [
+      "cats",
+      "books"
+    ],
+    "Dislikes": [
+      "noise",
+      "darkness"
+    ],
+    "MaxHP": 67,
+    "Mana": 65,
+    "Strength": 10,
+    "Evasion": 5,
+    "Inventory": {
+      "Gold": 10,
+      "EquippedWeapon": {
+        "Name": "Battle Axe",
+        "MinDamage": 4,
+        "MaxDamage": 6,
+        "MissChance": 0.06840764673257803,
+        "CritChance": 0.14944854548395678,
+        "AttackDescriptions": [
+          "cleaves with force",
+          "chops down hard",
+          "spins a brutal arc"
+        ]
+      },
+      "weapons": [
+        {
+          "Name": "Battle Axe",
+          "MinDamage": 4,
+          "MaxDamage": 6,
+          "MissChance": 0.06840764673257803,
+          "CritChance": 0.14944854548395678,
+          "AttackDescriptions": [
+            "cleaves with force",
+            "chops down hard",
+            "spins a brutal arc"
+          ]
+        }
+      ]
+    }
+  }
+}

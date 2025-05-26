@@ -1,0 +1,52 @@
+{
+  "$id": "1",
+  "CurrentArea": "MeadowField",
+  "CurrentHP": 100,
+  "Name": "Bran",
+  "Gender": "Female",
+  "Height": 198,
+  "Weight": 100,
+  "BodyType": "Heavy",
+  "Profession": "Thief",
+  "Likes": {
+    "$id": "2",
+    "$values": [
+      "cats",
+      "magic"
+    ]
+  },
+  "Dislikes": {
+    "$id": "3",
+    "$values": [
+      "noise",
+      "rules"
+    ]
+  },
+  "MaxHP": 84,
+  "Mana": 63,
+  "Strength": 10,
+  "Evasion": 5,
+  "Inventory": {
+    "$id": "4",
+    "Gold": 0,
+    "EquippedWeapon": {
+      "$id": "5",
+      "Name": "Battle Axe",
+      "MinDamage": 2,
+      "MaxDamage": 7,
+      "MissChance": 0.02100101702424713,
+      "CritChance": 0.28818642996346977,
+      "AttackDescriptions": {
+        "$id": "6",
+        "$values": [
+          "cleaves with force",
+          "chops down hard",
+          "spins a brutal arc"
+        ]
+      }
+    }
+  },
+  "EquippedWeapon": {
+    "$ref": "5"
+  }
+}

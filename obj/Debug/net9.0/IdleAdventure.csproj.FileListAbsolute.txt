@@ -1,0 +1,14 @@
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/bin/Debug/net9.0/IdleAdventure
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/bin/Debug/net9.0/IdleAdventure.deps.json
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/bin/Debug/net9.0/IdleAdventure.runtimeconfig.json
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/bin/Debug/net9.0/IdleAdventure.dll
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/bin/Debug/net9.0/IdleAdventure.pdb
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.GeneratedMSBuildEditorConfig.editorconfig
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.AssemblyInfoInputs.cache
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.AssemblyInfo.cs
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.csproj.CoreCompileInputs.cache
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.dll
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/refint/IdleAdventure.dll
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.pdb
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.genruntimeconfig.cache
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/ref/IdleAdventure.dll

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "IdleAdventure/1.0.0": {
+        "runtime": {
+          "IdleAdventure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "IdleAdventure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

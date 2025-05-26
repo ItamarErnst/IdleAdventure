@@ -1,0 +1,60 @@
+{
+  "Character": {
+    "CurrentArea": "MeadowField",
+    "Name": "Kael",
+    "Gender": "Fluid",
+    "Height": 162,
+    "Weight": 51,
+    "BodyType": "Athletic",
+    "Profession": "Bard",
+    "Likes": [
+      "flowers",
+      "strategy"
+    ],
+    "Dislikes": [
+      "snakes",
+      "waiting"
+    ],
+    "CurrentHP": 16,
+    "CurrentMP": 9,
+    "MaxHP": 22,
+    "Mana": 9,
+    "Strength": 3,
+    "Agility": 4,
+    "Endurance": 3,
+    "Intelligence": 7,
+    "Charisma": 3,
+    "Perception": 7,
+    "Luck": 9,
+    "Evasion": 8,
+    "Inventory": {
+      "Gold": 14,
+      "EquippedWeapon": {
+        "Name": "Rusty Sword",
+        "MinDamage": 3,
+        "MaxDamage": 6,
+        "MissChance": 0.10448582662034736,
+        "CritChance": 0.19094644076723347,
+        "AttackDescriptions": [
+          "slashes clumsily",
+          "swings wildly",
+          "stabs forward"
+        ]
+      },
+      "weapons": [
+        {
+          "Name": "Rusty Sword",
+          "MinDamage": 3,
+          "MaxDamage": 6,
+          "MissChance": 0.10448582662034736,
+          "CritChance": 0.19094644076723347,
+          "AttackDescriptions": [
+            "slashes clumsily",
+            "swings wildly",
+            "stabs forward"
+          ]
+        }
+      ]
+    }
+  }
+}
