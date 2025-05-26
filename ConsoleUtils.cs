@@ -33,16 +33,6 @@ namespace IdleAdventure
             Console.WriteLine(bar);
         }
 
-        /// <summary>Prompts the user for input with a colored label.</summary>
-        public static string PromptInput(string label, string color = ColorText.Yellow)
-        {
-            Console.Write($"{color}{label}{ColorText.Reset}: ");
-            if (Console.ReadLine() == null)
-                return "";
-            
-            return Console.ReadLine();
-        }
-
         /// <summary>Draws a box around a list of strings (with optional border color).</summary>
         public static void DrawBox(List<string> lines, string borderColor)
         {

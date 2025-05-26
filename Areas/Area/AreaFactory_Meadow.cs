@@ -1,8 +1,3 @@
-using IdleAdventure;
-using IdleAdventure.Areas;
-using System;
-using System.Collections.Generic;
-
 namespace IdleAdventure.Areas
 {
     public static class AreaFactory_Meadow
@@ -43,6 +38,7 @@ namespace IdleAdventure.Areas
                 .AsCombat(randomEnemy,
                     onWin: EventBuilder.Describe(randomEnemy.DeathText)
                         .WithAction(c=> c.Inventory.AddGold(Random.Shared.Next(1, 3)))
+                        .WithAction(c=> c.GainXP(Random.Shared.Next(1, 5)))
                         .Build(),
                     onLose: EventBuilder.Describe(randomEnemy.WinText).Build())
                 .Build();

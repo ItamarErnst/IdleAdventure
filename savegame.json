@@ -1,57 +1,60 @@
 {
   "Character": {
-    "CurrentArea": "MeadowField",
-    "Name": "Kael",
-    "Gender": "Fluid",
-    "Height": 162,
-    "Weight": 51,
-    "BodyType": "Athletic",
-    "Profession": "Bard",
+    "CurrentArea": "DarkCave",
+    "Level": 1,
+    "CurrentXP": 4,
+    "XPToNextLevel": 100,
+    "Name": "Bran",
+    "Gender": "Male",
+    "Height": 153,
+    "Weight": 104,
+    "BodyType": "Heavy",
+    "Profession": "Monk",
     "Likes": [
-      "flowers",
-      "strategy"
+      "magic",
+      "gold"
     ],
     "Dislikes": [
-      "snakes",
-      "waiting"
+      "fish",
+      "dust"
     ],
-    "CurrentHP": 16,
-    "CurrentMP": 9,
-    "MaxHP": 22,
-    "Mana": 9,
-    "Strength": 3,
-    "Agility": 4,
-    "Endurance": 3,
-    "Intelligence": 7,
-    "Charisma": 3,
-    "Perception": 7,
-    "Luck": 9,
-    "Evasion": 8,
+    "CurrentHP": 13,
+    "CurrentMP": 8,
+    "MaxHP": 21,
+    "Mana": 8,
+    "Strength": 9,
+    "Agility": 3,
+    "Endurance": 9,
+    "Intelligence": 8,
+    "Charisma": 7,
+    "Perception": 5,
+    "Luck": 8,
+    "Evasion": 9,
     "Inventory": {
-      "Gold": 14,
+      "Gold": 10,
       "EquippedWeapon": {
-        "Name": "Rusty Sword",
-        "MinDamage": 3,
-        "MaxDamage": 6,
-        "MissChance": 0.10448582662034736,
-        "CritChance": 0.19094644076723347,
+        "Name": "Hook Blade",
+        "MinDamage": 2,
+        "MaxDamage": 3,
+        "MissChance": 0.09564586169787148,
+        "CritChance": 0.29711417929249906,
         "AttackDescriptions": [
-          "slashes clumsily",
-          "swings wildly",
-          "stabs forward"
+          "snags with a curved slice",
+          "hooks and pulls",
+          "slashes with deceptive motion"
         ]
       },
       "weapons": [
         {
-          "Name": "Rusty Sword",
-          "MinDamage": 3,
-          "MaxDamage": 6,
-          "MissChance": 0.10448582662034736,
-          "CritChance": 0.19094644076723347,
+          "Name": "Hook Blade",
+          "MinDamage": 2,
+          "MaxDamage": 3,
+          "MissChance": 0.09564586169787148,
+          "CritChance": 0.29711417929249906,
           "AttackDescriptions": [
-            "slashes clumsily",
-            "swings wildly",
-            "stabs forward"
+            "snags with a curved slice",
+            "hooks and pulls",
+            "slashes with deceptive motion"
           ]
         }
       ]

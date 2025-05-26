@@ -12,3 +12,4 @@
 /home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.pdb
 /home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.genruntimeconfig.cache
 /home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/ref/IdleAdventure.dll
+/home/itamar/RiderProjects/IdleAdventure/IdleAdventure/obj/Debug/net9.0/IdleAdventure.sourcelink.json

@@ -27,26 +27,19 @@ namespace IdleAdventure.Areas
 
         public EventBuilder WithTransition(string area, double chance = 1.0)
         {
-            if (chance >= 1.0)
+            _transitionChance = chance;
+            _action = (c) =>
             {
-                _areaTransition = area;
-            }
-            else
-            {
-                _transitionChance = chance;
-                _action = (c) =>
+                if (Random.Shared.NextDouble() <= chance)
                 {
-                    if (Random.Shared.NextDouble() < chance)
-                    {
-                        c.CurrentArea = area;
-                    }
-                    else
-                    {
-                        Thread.Sleep(GlobalTimer.EventTimer);
-                        ColorText.WriteLine("-- You decided to ignore it.", ConsoleColor.DarkGray);
-                    }
-                };
-            }
+                    c.CurrentArea = area;
+                }
+                else
+                {
+                    Thread.Sleep(GlobalTimer.EventTimer);
+                    ColorText.WriteLine("-- You decided to ignore it.", ConsoleColor.DarkGray);
+                }
+            };
             return this;
         }
 

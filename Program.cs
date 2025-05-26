@@ -49,7 +49,7 @@ class Program
         screenManager.ShowCharacterInfo(character);
         
         AdventureManager adventureManager = new AdventureManager(character);
-        var adventureTask = adventureManager.RunAsync();
+        adventureManager.RunAsync();
         
         while (true)
         {

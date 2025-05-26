@@ -1,8 +1,13 @@
+using System.Text;
+
 namespace IdleAdventure;
 
 public class Character
 {
     public string CurrentArea { get; set; }
+    public int Level { get; private set; } = 1;
+    public int CurrentXP { get; private set; } = 0;
+    public int XPToNextLevel => Level * 100;
 
     public string Name { get; set; }
     public string Gender { get; set; }
@@ -46,16 +51,98 @@ public class Character
         return Inventory.GetWeapon();
     }
     
+    public void GainXP(int amount)
+    {
+        CurrentXP += amount * 3;
+        ColorText.WriteLine($"Gained {amount} XP!", ConsoleColor.Yellow);
+
+        while (CurrentXP >= XPToNextLevel)
+        {
+            CurrentXP -= XPToNextLevel;
+            LevelUp();
+        }
+
+        DrawXPBar(CurrentXP, XPToNextLevel);
+    }
+
+    private void LevelUp()
+    {
+        Level++;
+        ColorText.WriteLine($"Level Up! You are now level {Level}.", ConsoleColor.Cyan);
+
+        int statPoints = 3;
+        DistributeStatPoints(statPoints);
+    }
+
+    private void DistributeStatPoints(int points)
+    {
+        var stats = new List<Action>
+        {
+            () => Strength++,
+            () => Agility++,
+            () => Endurance++,
+            () => Intelligence++,
+            () => Charisma++,
+            () => Perception++,
+            () => Luck++,
+            () => Evasion++
+        };
+
+        for (int i = 0; i < points; i++)
+        {
+            int index = Random.Shared.Next(stats.Count);
+            stats[index]();
+        }
+
+        ColorText.WriteLine($"+{points} stat points distributed!", ConsoleColor.Magenta);
+    }
+    
+    private void DrawXPBar(int current, int max, int barWidth = 40)
+    {
+        double ratio = (double)current / max;
+        int filled = (int)(ratio * barWidth);
+        int empty = barWidth - filled;
+
+        string filledPart = new string('█', filled);
+        string emptyPart = new string('░', empty);
+        string percent = $"{(int)(ratio * 100)}%";
+
+        // Center percentage in the bar
+        int totalBarLength = barWidth;
+        int percentStart = (barWidth - percent.Length) / 2;
+
+        // Build bar string with percentage embedded
+        var bar = new StringBuilder();
+        for (int i = 0; i < totalBarLength; i++)
+        {
+            if (i == percentStart)
+            {
+                bar.Append(percent);
+                i += percent.Length - 1;
+            }
+            else
+            {
+                bar.Append(i < filled ? '█' : '░');
+            }
+        }
+
+        ColorText.WriteLine($"[{bar}]", ConsoleColor.DarkGray);
+    }
+
+    
     public void HealFull()
     {
         int hpHealed = MaxHP - CurrentHP;
-        int manaHealed = MaxMana() - Mana;
+        int manaHealed = CurrentMP - Mana;
 
         CurrentHP = MaxHP;
-        Mana = MaxMana();
+        Mana = CurrentMP;
 
-        ColorText.WriteLine($"Fully healed: +{hpHealed} HP, +{manaHealed} Mana", ConsoleColor.Green);
-        ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP} | Mana: {Mana}/{MaxMana()}", ConsoleColor.DarkGray);
+        if (hpHealed != 0 || manaHealed != 0)
+        {
+            ColorText.WriteLine($"Fully healed: +{hpHealed} HP, +{manaHealed} Mana", ConsoleColor.Green);
+            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP} | Mana: {Mana}/{CurrentMP}", ConsoleColor.DarkGray);
+        }
     }
 
     public void HealHP(int amount)
@@ -64,24 +151,23 @@ public class Character
         CurrentHP = Math.Min(CurrentHP + amount, MaxHP);
         int healed = CurrentHP - before;
 
-        ColorText.WriteLine($"Healed HP: +{healed}", ConsoleColor.Green);
-        ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP}", ConsoleColor.DarkGray);
+        if (healed != 0)
+        {
+            ColorText.WriteLine($"Healed HP: +{healed}", ConsoleColor.Green);
+            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP}", ConsoleColor.DarkGray);
+        }
     }
 
     public void HealMP(int amount)
     {
         int before = Mana;
-        Mana = Math.Min(Mana + amount, MaxMana());
+        Mana = Math.Min(Mana + amount, CurrentMP);
         int healed = Mana - before;
 
-        ColorText.WriteLine($"Restored Mana: +{healed}", ConsoleColor.Blue);
-        ColorText.WriteLine($"Current Mana: {Mana}/{MaxMana()}", ConsoleColor.DarkGray);
+        if (healed != 0)
+        {
+            ColorText.WriteLine($"Restored Mana: +{healed}", ConsoleColor.Blue);
+            ColorText.WriteLine($"Current Mana: {Mana}/{CurrentMP}", ConsoleColor.DarkGray);
+        }
     }
-
-    public int MaxMana()
-    {
-        return CurrentMP; // or use: return 50 + Intelligence * 2;
-    }
-
-
 }

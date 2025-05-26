@@ -1,8 +1,3 @@
-using IdleAdventure;
-using IdleAdventure.Areas;
-using System;
-using System.Collections.Generic;
-
 namespace IdleAdventure.Areas
 {
     public static class AreaFactory_Village
@@ -37,7 +32,7 @@ namespace IdleAdventure.Areas
                 .Build();
             
             var inn = EventBuilder
-                .Describe("You entered a the famos ")
+                .Describe("You entered a the Inn")
                 .WithAction(c=> c.HealFull())
                 .Build();
 

@@ -33,6 +33,7 @@ namespace IdleAdventure.Areas
                 .AsCombat(randomEnemy,
                     onWin: EventBuilder.Describe(randomEnemy.DeathText)
                         .WithAction(c=> c.Inventory.AddGold(Random.Shared.Next(1, 3)))
+                        .WithAction(c=> c.GainXP(Random.Shared.Next(1, 5)))
                         .Build(),
                     onLose: EventBuilder.Describe(randomEnemy.WinText).Build())
                 .Build();
@@ -48,7 +49,7 @@ namespace IdleAdventure.Areas
 
             var toMeadow = EventBuilder
                 .Describe("You exit the cave and arrive at a meadow field.")
-                .WithTransition("MeadowField")
+                .WithTransition("MeadowField",1)
                 .Build();
 
             var toVillage = EventBuilder
@@ -61,7 +62,6 @@ namespace IdleAdventure.Areas
                 .WithChanceOutcome(0.3, new[] { toMeadow,toVillage }, new[] { path })
                 .Build();
 
-            // FollowUps for path
             path.FollowUps.AddRange(new[]
             {
                 path,path,
