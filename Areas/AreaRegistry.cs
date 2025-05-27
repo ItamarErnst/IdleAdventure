@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using IdleAdventure.AreaFactories;
 
 namespace IdleAdventure.Areas
 {
@@ -9,6 +10,8 @@ namespace IdleAdventure.Areas
         {
             { "DarkCave", AreaFactory_Cave.Create },
             { "MeadowField", AreaFactory_Meadow.Create },
+            { "ForestShrine", AreaFactory_ForestShrine.Create },
+            { "ForgottenCrypt", AreaFactory_ForgottenCrypt.Create },
             { "Village", AreaFactory_Village.Create }
         };
 

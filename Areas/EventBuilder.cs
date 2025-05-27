@@ -6,10 +6,6 @@ namespace IdleAdventure.Areas
     {
         private string _description = string.Empty;
         private Action<Character>? _action;
-        private List<AdventureEvent> _followUps = new();
-        private List<AdventureEvent> _successFollowUps = new();
-        private List<AdventureEvent> _failFollowUps = new();
-        private string? _areaTransition;
         private double? _transitionChance;
 
         public class SkipEventExecution : Exception {}
@@ -49,7 +45,6 @@ namespace IdleAdventure.Areas
             {
                 bool success = Random.Shared.NextDouble() < chance;
                 Thread.Sleep(GlobalTimer.TurnTimer);
-                ColorText.WriteLine(success ? "You go for it..." : "You hesitate...", ConsoleColor.Gray);
 
                 var chosen = success ? successFollowUps : failFollowUps;
                 if (chosen.Length > 0)
@@ -60,25 +55,10 @@ namespace IdleAdventure.Areas
             };
             return this;
         }
-
-        public EventBuilder WithFollowUps(params AdventureEvent[] events)
-        {
-            _followUps.AddRange(events);
-            return this;
-        }
-
-        public EventBuilder AsCombat(Enemy enemy, AdventureEvent? onWin = null, AdventureEvent? onLose = null)
-        {
-            _action = (character) =>
-            {
-                CombatSystem.Run(character, enemy, onWin, onLose);
-            };
-            return this;
-        }
         
         public AdventureEvent Build()
         {
-            var evt = new AdventureEvent(_description, _action, _areaTransition);
+            var evt = new AdventureEvent(_description, _action);
             return evt;
         }
     }

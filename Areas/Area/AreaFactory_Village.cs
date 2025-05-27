@@ -9,7 +9,10 @@ namespace IdleAdventure.Areas
                 EntranceMessage = "You arrive at a lively village with bustling streets and friendly faces."
             };
 
-            var fluff = new[]
+            var rand = Random.Shared;
+
+            // 🔹 PATH
+            var streetWalk = new PathEvent(null, new[]
             {
                 "You hear laughter from a nearby tavern.",
                 "A cat brushes past your leg and vanishes into an alley.",
@@ -17,54 +20,79 @@ namespace IdleAdventure.Areas
                 "Children play in the street nearby.",
                 "A street performer is playing a lute softly.",
                 "You pass a flower vendor arranging her bouquet.",
-                "You walk down a cobblestone street lined with small shops.",
-            };
+                "You walk down a cobblestone street lined with small shops."
+            });
 
-            var street = new PathEvent( null, fluff);
+            // 🔹 INN ENCOUNTER (conditional healing chain)
+            var innHealed = new AdventureEvent(
+                "You rest comfortably in the inn, fully restored.",
+                c => c.HealFull()
+            );
 
-            var npcTalk = EventBuilder
-                .Describe("A villager greets you warmly and offers a tale.")
-                .Build();
+            var innRefused = new AdventureEvent(
+                "The innkeeper shakes his head. 'Maybe next time, traveler.'"
+            );
 
-            var gold = EventBuilder
-                .Describe("You notice some gold coins lying on the ground!")
-                .WithAction(c=> c.Inventory.AddGold(1))
-                .Build();
-            
-            var inn = EventBuilder
-                .Describe("You entered a the Inn")
-                .WithAction(c=> c.HealFull())
-                .Build();
-
-            var rare1 = EventBuilder
-                .Describe("A traveling bard performs a lively tune.")
-                .Build();
-
-            var rare2 = EventBuilder
-                .Describe("You help a child find their lost pet.")
-                .Build();
-
-            var exitToMeadow = EventBuilder
-                .Describe("You reached the edge of the village and you see the meadow field.")
-                .WithTransition("MeadowField", 0.7)
-                .Build();
-            
-            var healingFountain = new AdventureEvent(
-                "You find a sparkling healing fountain.",
-                c => c.HealHP(10)
+            var innDecision = new AdventureEvent(
+                "The innkeeper offers you a warm bed for 5 gold."
             )
             {
-                Condition = c => c.CurrentHP < c.MaxHP / 2
+                Eligibility = c => c.Inventory.Gold >= 5
             };
 
-            village.AddEvents(new AdventureEvent[]
+            // 75% chance to heal and pay
+            innDecision.AddNext(innHealed, c =>
             {
-                street,street,street,
-                npcTalk,
-                gold,
-                inn
+                if (rand.NextDouble() < 0.75)
+                {
+                    c.Inventory.AddGold(-5);
+                    return true;
+                }
+                return false;
             });
+
+            // 25% or ineligible
+            innDecision.AddNext(innRefused);
+
+            // 🔹 COINS ON GROUND (chance-based)
+            var streetCoins = new AdventureEvent(
+                "You notice a few coins lying on the ground.",
+                c => c.Inventory.AddGold(1)
+            )
+            {
+                Eligibility = _ => rand.NextDouble() < 0.3
+            };
+
+            // 🔹 FLAVOR
+            var localChat = new AdventureEvent("A villager greets you warmly and offers a tale.");
+
+            // 🔹 RARE EVENTS
+            var bardSong = new AdventureEvent("A traveling bard performs a lively tune.")
+            {
+                Eligibility = _ => rand.NextDouble() < 0.1
+            };
+
+            var lostPet = new AdventureEvent("You help a child find their lost pet.")
+            {
+                Eligibility = _ => rand.NextDouble() < 0.1
+            };
+
+            // 🔹 EXIT
+            // Village → Meadow
+            var exitToMeadow = new ExitEventBuilder("You find a narrow trail heading toward the meadows.")
+                .AddExit("You reach the edge of the village and see the meadow field.", "MeadowField", 1.0)
+                .Build(rand);
+            streetWalk.AddNext(exitToMeadow, c => rand.NextDouble() < 0.1);
             
+            village.AddEvents(
+                new WeightedEvent(streetWalk, 4),
+                new WeightedEvent(innDecision, 3),
+                new WeightedEvent(localChat, 3),
+                new WeightedEvent(streetCoins, 2),
+                new WeightedEvent(bardSong, 1),
+                new WeightedEvent(lostPet, 1)
+            );
+
             return village;
         }
     }

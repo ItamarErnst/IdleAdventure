@@ -1,15 +1,13 @@
 ﻿namespace IdleAdventure;
-
 using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 class Program
 {
-    static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
-        Console.Clear();
-        
         Character character;
 
         Console.WriteLine("Welcome to Idle Adventure!");
@@ -29,40 +27,45 @@ class Program
                 Console.WriteLine("Failed to load game. Starting new...");
                 character = CharacterGenerator.Generate();
                 Weapon weapon = WeaponFactory.CreateRandom();
-                character.Inventory.SetStartingInventory(weapon,10);
+                character.Inventory.SetStartingInventory(weapon, 10);
             }
         }
         else
         {
             character = CharacterGenerator.Generate();
             Weapon weapon = WeaponFactory.CreateRandom();
-            character.Inventory.SetStartingInventory(weapon,10);
+            character.Inventory.SetStartingInventory(weapon, 10);
         }
 
         SaveData.SaveGame(character);
-        bool paused = false;
         var screenManager = new ScreenManager();
-        
+
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("=== Welcome to the Idle Adventure! ===");
         Console.ResetColor();
         screenManager.ShowCharacterInfo(character);
-        
-        AdventureManager adventureManager = new AdventureManager(character);
-        adventureManager.RunAsync();
-        
-        while (true)
-        {
-            if (Console.KeyAvailable)
-            {
-                var key = Console.ReadKey(true).Key;
-                if (key == ConsoleKey.P)
-                {
-                    screenManager.ShowPlayerStats(character);
-                }
-            }
 
-            Thread.Sleep(100);
-        }
+        // ✅ In Main()
+        var adventureManager = new AdventureManager(character);
+        var adventureTask = adventureManager.RunAsync();
+
+        _ = Task.Run(() =>
+        {
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    var key = Console.ReadKey(true).Key;
+                    if (key == ConsoleKey.P)
+                    {
+                        adventureManager.TogglePause();
+                    }
+                }
+
+                Thread.Sleep(100);
+            }
+        });
+
+        await adventureTask;
     }
 }

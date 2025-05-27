@@ -21,7 +21,7 @@ public class Character
     public int CurrentHP { get; set; } = 0;
     public int CurrentMP { get; set; } = 0;
     public int MaxHP { get; set; } = 0;
-    public int Mana { get; set; } = 0;
+    public int MaxMana { get; set; } = 0;
 
     // RPG Stats
     public int Strength { get; set; } = 5;
@@ -133,15 +133,15 @@ public class Character
     public void HealFull()
     {
         int hpHealed = MaxHP - CurrentHP;
-        int manaHealed = CurrentMP - Mana;
+        int manaHealed = CurrentMP - MaxMana;
 
         CurrentHP = MaxHP;
-        Mana = CurrentMP;
+        MaxMana = CurrentMP;
 
         if (hpHealed != 0 || manaHealed != 0)
         {
             ColorText.WriteLine($"Fully healed: +{hpHealed} HP, +{manaHealed} Mana", ConsoleColor.Green);
-            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP} | Mana: {Mana}/{CurrentMP}", ConsoleColor.DarkGray);
+            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP} | Mana: {MaxMana}/{CurrentMP}", ConsoleColor.DarkGray);
         }
     }
 
@@ -160,14 +160,14 @@ public class Character
 
     public void HealMP(int amount)
     {
-        int before = Mana;
-        Mana = Math.Min(Mana + amount, CurrentMP);
-        int healed = Mana - before;
+        int before = MaxMana;
+        MaxMana = Math.Min(MaxMana + amount, CurrentMP);
+        int healed = MaxMana - before;
 
         if (healed != 0)
         {
             ColorText.WriteLine($"Restored Mana: +{healed}", ConsoleColor.Blue);
-            ColorText.WriteLine($"Current Mana: {Mana}/{CurrentMP}", ConsoleColor.DarkGray);
+            ColorText.WriteLine($"Current Mana: {MaxMana}/{CurrentMP}", ConsoleColor.DarkGray);
         }
     }
 }

@@ -2,9 +2,11 @@ namespace IdleAdventure;
 
 public class Inventory
 {
+    public Weapon EquippedWeapon { get; set; } = WeaponFactory.CreateUnarmed();
     public List<Weapon> weapons = new();
     public int Gold { get; set; } = 0;
-    public Weapon EquippedWeapon { get; set; } = WeaponFactory.CreateUnarmed();
+    
+    public Dictionary<string, int> items = new();
     
     public Weapon GetWeapon()
     {
@@ -32,6 +34,18 @@ public class Inventory
         }
     }
 
+    public void AddItem(string itemName)
+    {
+        if (items.TryGetValue(itemName, out int count))
+        {
+            count++;
+        }
+        else
+        {
+            items.Add(itemName, 1);
+        }
+    }
+
     public void AddGold(int amount)
     {
         Gold += amount;
@@ -48,6 +62,12 @@ public class Inventory
         {
             string equipped = (w == EquippedWeapon) ? " (Equipped)" : "";
             infoLines.Add($"   • {w.Name}{equipped} [{w.MinDamage}-{w.MaxDamage} dmg]");
+        }
+        
+        infoLines.Add($"  Items:");
+        foreach (var i in items)
+        {
+            infoLines.Add($"   • {i.Key} [{i.Value}]");
         }
 
         return infoLines;

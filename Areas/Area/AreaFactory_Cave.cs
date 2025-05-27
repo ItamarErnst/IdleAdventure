@@ -9,7 +9,10 @@ namespace IdleAdventure.Areas
                 EntranceMessage = "You step cautiously into the dark, damp cave..."
             };
 
-            var fluff = new[]
+            var rand = Random.Shared;
+
+            // 🔹 PATH
+            var cavePath = new PathEvent(null, new[]
             {
                 "You hear water dripping in the dark.",
                 "A small mouse darts across the floor.",
@@ -18,73 +21,82 @@ namespace IdleAdventure.Areas
                 "A cold breeze brushes your neck.",
                 "You follow a twisting cave path...",
                 "Your torch flickers ominously."
+            });
+
+            // 🔹 HEALING
+            var glowingCrystal = new AdventureEvent(
+                "A mysterious glowing crystal pulses with warm light.",
+                c => c.HealMP(6))
+            {
+                Eligibility = c => c.MaxMana < c.CurrentMP
             };
 
-            var path = new PathEvent( null, fluff);
+            // 🔹 TREASURE — chance based
+            var treasureChest = new AdventureEvent(
+                "You find a treasure chest filled with old gold coins!",
+                c => c.Inventory.AddGold(rand.Next(5, 15)))
+            {
+                Eligibility = _ => rand.NextDouble() < 0.25 // 25% chance
+            };
 
-            var treasure = EventBuilder
-                .Describe("You found a treasure chest filled with gold!")
-                .WithAction(c=> c.Inventory.AddGold(Random.Shared.Next(5, 15)))
-                .Build();
+            // 🔹 RARE EVENTS — very low chance
+            var ancientPaintings = new AdventureEvent("You discover ancient cave paintings...")
+            {
+                Eligibility = _ => rand.NextDouble() < 0.1
+            };
 
-            var randomEnemy = EnemyFactory.CreateRandom();
-            var enemy = EventBuilder
-                .Describe(randomEnemy.EncounterText)
-                .AsCombat(randomEnemy,
-                    onWin: EventBuilder.Describe(randomEnemy.DeathText)
-                        .WithAction(c=> c.Inventory.AddGold(Random.Shared.Next(1, 3)))
-                        .WithAction(c=> c.GainXP(Random.Shared.Next(1, 5)))
-                        .Build(),
-                    onLose: EventBuilder.Describe(randomEnemy.WinText).Build())
-                .Build();
+            var skeletonRemains = new AdventureEvent("You stumble upon the skeleton of a past adventurer.")
+            {
+                Eligibility = _ => rand.NextDouble() < 0.1
+            };
 
-            var rare1 = EventBuilder
-                .Describe("You discover ancient cave paintings!")
-                .Build();
-
-            var rare2 = EventBuilder
-                .Describe("A mysterious glowing crystal lights your way.")
-                .WithAction(c=> c.HealMP(5))
-                .Build();
-
-            var toMeadow = EventBuilder
-                .Describe("You exit the cave and arrive at a meadow field.")
-                .WithTransition("MeadowField",1)
-                .Build();
-
-            var toVillage = EventBuilder
-                .Describe("You exit the cave and enter a nearby village.")
-                .WithTransition("Village")
-                .Build();
-            
-            var exit = EventBuilder
-                .Describe("You see a faint light — the cave exit!")
-                .WithAction(c =>
+            // 🔹 COMBAT
+            var combatEvent = EventBuilder
+                .Describe("You hear unsettling sounds from the shadows...")
+                .WithAction(character =>
                 {
-                    if (Random.Shared.NextDouble() < 0.3)
+                    var bigTreasure = new AdventureEvent("You uncover a rare artifact!", c => c.Inventory.AddGold(50))
                     {
-                        ColorText.WriteLine("You decide to walk toward it...", ConsoleColor.Gray);
+                        Eligibility = _ => Random.Shared.NextDouble() < 0.05
+                    };
 
-                        // 50/50 which area you reach
-                        var next = Random.Shared.NextDouble() < 0.5 ? toMeadow : toVillage;
-                        next.Execute(c);
-                    }
-                    else
+                    var onWin = new AdventureEvent("Victory rewards your bravery.", c =>
                     {
-                        ColorText.WriteLine("You hesitate and continue exploring instead.", ConsoleColor.DarkGray);
-                        Thread.Sleep(GlobalTimer.EventTimer);
-                    }
+                        c.GainXP(5);
+                        c.Inventory.AddGold(3);
+                    });
+
+                    onWin.AddNext(bigTreasure);
+
+                    CombatSystem.Run(
+                        character,
+                        enemyFactory: EnemyFactory.CreateRandom,
+                        onWin: onWin,
+                        onLose: new AdventureEvent("You collapse in the darkness...")
+                    );
                 })
                 .Build();
 
-            cave.AddEvents(new AdventureEvent[]
-            {
-                path,path,path,path,
-                enemy,
-                rare1,
-                rare2,
-            });
+            // 🔹 EXIT
+            var exitChance = new ExitEventBuilder("You see a faint light — the cave exit!")
+                .AddExit("You exit to the meadow.", "MeadowField", 0.5)
+                .AddExit("You step into a cold, ancient chamber...", "ForgottenCrypt", 0.5)
+                .AddExit("You enter a nearby village.", "Village", 1.0)
+                .Build(rand);
 
+            cavePath.AddNext(exitChance, _ => rand.NextDouble() < 0.15);
+
+
+            
+            cave.AddEvents(
+                new WeightedEvent(cavePath, 4),
+                new WeightedEvent(combatEvent, 6),
+                new WeightedEvent(treasureChest, 2),
+                new WeightedEvent(glowingCrystal, 2),
+                new WeightedEvent(ancientPaintings, 1),
+                new WeightedEvent(skeletonRemains, 1)
+            );
+            
             return cave;
         }
     }

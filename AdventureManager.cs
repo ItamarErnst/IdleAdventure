@@ -6,16 +6,46 @@ public class AdventureManager
     private readonly Character character;
     private readonly Dictionary<string, Area> areas = new();
     private readonly Random rand = new();
+
     private string currentAreaName = "MeadowField";
     private bool hasShownEntranceMessage = false;
+
+    private AdventureEvent? currentEvent = null;
+
+    private volatile bool isPaused = false;
+    private readonly object pauseLock = new();
 
     public AdventureManager(Character character)
     {
         this.character = character;
-
         foreach (var areaName in AreaRegistry.AllAreaNames)
-        {
             areas[areaName] = AreaRegistry.Get(areaName);
+    }
+
+    public void TogglePause()
+    {
+        lock (pauseLock)
+        {
+            isPaused = !isPaused;
+            if (!isPaused)
+            {
+                Monitor.PulseAll(pauseLock);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(isPaused ? "\n⏸️  Game Paused" : "\n▶️  Game Resumed");
+            Console.ResetColor();
+        }
+    }
+
+    private void WaitIfPaused()
+    {
+        lock (pauseLock)
+        {
+            while (isPaused)
+            {
+                Monitor.Wait(pauseLock);
+            }
         }
     }
 
@@ -23,6 +53,8 @@ public class AdventureManager
     {
         while (true)
         {
+            WaitIfPaused(); // 🔹 Pause support
+
             if (!areas.TryGetValue(currentAreaName, out var area))
             {
                 ColorText.WriteLine($"Unknown area: {currentAreaName}", ConsoleColor.Red);
@@ -36,10 +68,12 @@ public class AdventureManager
                 await Task.Delay(GlobalTimer.NewAreaTimer);
             }
 
-            var evt = area.GetNextEvent(character, rand);
+            var nextEvent = area.GetNextEvent(character, currentEvent, rand);
+
             try
             {
-                evt.Execute(character);
+                nextEvent.Execute(character);
+                currentEvent = nextEvent;
             }
             catch (EventBuilder.SkipEventExecution)
             {
@@ -50,6 +84,7 @@ public class AdventureManager
             {
                 currentAreaName = character.CurrentArea;
                 hasShownEntranceMessage = false;
+                currentEvent = null;
                 await Task.Delay(GlobalTimer.NewAreaTimer);
                 continue;
             }

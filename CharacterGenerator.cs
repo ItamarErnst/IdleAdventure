@@ -43,7 +43,7 @@ public static class CharacterGenerator
             Likes = likes.OrderBy(_ => rand.Next()).Take(2).ToList(),
             Dislikes = dislikes.OrderBy(_ => rand.Next()).Take(2).ToList(),
             MaxHP = rand.Next(15, 30),
-            Mana = rand.Next(0, 25),
+            MaxMana = rand.Next(0, 25),
 
             Strength = rand.Next(3, 11),
             Agility = rand.Next(3, 11),
@@ -56,7 +56,7 @@ public static class CharacterGenerator
         };
         
         c.CurrentHP = c.MaxHP;
-        c.CurrentMP = c.Mana;
+        c.CurrentMP = c.MaxMana;
         return c;
     }
 }

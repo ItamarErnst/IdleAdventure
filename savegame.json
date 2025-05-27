@@ -1,60 +1,60 @@
 {
   "Character": {
-    "CurrentArea": "DarkCave",
+    "CurrentArea": "MeadowField",
     "Level": 1,
-    "CurrentXP": 4,
+    "CurrentXP": 15,
     "XPToNextLevel": 100,
-    "Name": "Bran",
-    "Gender": "Male",
-    "Height": 153,
-    "Weight": 104,
-    "BodyType": "Heavy",
-    "Profession": "Monk",
+    "Name": "Dain",
+    "Gender": "Non-binary",
+    "Height": 175,
+    "Weight": 105,
+    "BodyType": "Average",
+    "Profession": "Merchant",
     "Likes": [
-      "magic",
-      "gold"
+      "adventure",
+      "magic"
     ],
     "Dislikes": [
       "fish",
       "dust"
     ],
-    "CurrentHP": 13,
-    "CurrentMP": 8,
-    "MaxHP": 21,
-    "Mana": 8,
-    "Strength": 9,
-    "Agility": 3,
-    "Endurance": 9,
-    "Intelligence": 8,
-    "Charisma": 7,
-    "Perception": 5,
-    "Luck": 8,
-    "Evasion": 9,
+    "CurrentHP": 14,
+    "CurrentMP": 16,
+    "MaxHP": 22,
+    "Mana": 16,
+    "Strength": 3,
+    "Agility": 7,
+    "Endurance": 4,
+    "Intelligence": 5,
+    "Charisma": 8,
+    "Perception": 4,
+    "Luck": 6,
+    "Evasion": 6,
     "Inventory": {
-      "Gold": 10,
+      "Gold": 13,
       "EquippedWeapon": {
-        "Name": "Hook Blade",
+        "Name": "Angry Cat",
         "MinDamage": 2,
-        "MaxDamage": 3,
-        "MissChance": 0.09564586169787148,
-        "CritChance": 0.29711417929249906,
+        "MaxDamage": 4,
+        "MissChance": 0.16384218613752588,
+        "CritChance": 0.23264142786136524,
         "AttackDescriptions": [
-          "snags with a curved slice",
-          "hooks and pulls",
-          "slashes with deceptive motion"
+          "throws a hissing cat at your face",
+          "scratches wildly while yowling",
+          "unleashes feline fury"
         ]
       },
       "weapons": [
         {
-          "Name": "Hook Blade",
+          "Name": "Angry Cat",
           "MinDamage": 2,
-          "MaxDamage": 3,
-          "MissChance": 0.09564586169787148,
-          "CritChance": 0.29711417929249906,
+          "MaxDamage": 4,
+          "MissChance": 0.16384218613752588,
+          "CritChance": 0.23264142786136524,
           "AttackDescriptions": [
-            "snags with a curved slice",
-            "hooks and pulls",
-            "slashes with deceptive motion"
+            "throws a hissing cat at your face",
+            "scratches wildly while yowling",
+            "unleashes feline fury"
           ]
         }
       ]

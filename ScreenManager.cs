@@ -26,7 +26,7 @@ class ScreenManager
             $"{ColorText.Green}Perception   {character.Perception,2}{ColorText.White}  | Profession: {character.Profession}",
             $"{ColorText.Green}Luck         {character.Luck,2}{ColorText.White}  | Likes: {string.Join(", ", character.Likes)}",
             $"{ColorText.Green}Evasion      {character.Evasion,2}{ColorText.White}  | Dislikes: {string.Join(", ", character.Dislikes)}",
-            $"{ColorText.Blue}HP           {character.CurrentHP,2}/{character.MaxHP,-3}{ColorText.White} | Mana: {character.Mana} MP",
+            $"{ColorText.Blue}HP           {character.CurrentHP,2}/{character.MaxHP,-3}{ColorText.White} | Mana: {character.MaxMana} MP",
             ""
         };
 
