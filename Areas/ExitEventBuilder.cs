@@ -24,6 +24,8 @@ public class ExitEventBuilder
             c => ColorText.WriteLine("You decide to walk toward it...", ConsoleColor.Gray)
         );
 
+        bool added = false;
+
         foreach (var (desc, area, chance) in _exits)
         {
             var transition = EventBuilder
@@ -31,8 +33,19 @@ public class ExitEventBuilder
                 .WithTransition(area, 1)
                 .Build();
 
-            discovery.AddNext(transition, _ => rand.NextDouble() < chance);
+            discovery.AddNext(transition, _ =>
+            {
+                bool success = rand.NextDouble() < chance;
+                if (success) added = true;
+                return success;
+            });
         }
+
+        // Add fallback if nothing was selected
+        discovery.AddNext(
+            new AdventureEvent("You wander a bit, but find nothing of interest."),
+            _ => !added
+        );
 
         return discovery;
     }

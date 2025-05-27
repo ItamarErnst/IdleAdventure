@@ -2,62 +2,63 @@
   "Character": {
     "CurrentArea": "MeadowField",
     "Level": 1,
-    "CurrentXP": 15,
+    "CurrentXP": 0,
     "XPToNextLevel": 100,
-    "Name": "Dain",
-    "Gender": "Non-binary",
-    "Height": 175,
-    "Weight": 105,
-    "BodyType": "Average",
-    "Profession": "Merchant",
+    "Name": "Thorne",
+    "Gender": "Other",
+    "Height": 151,
+    "Weight": 114,
+    "BodyType": "Slim",
+    "Profession": "Bard",
     "Likes": [
-      "adventure",
-      "magic"
+      "flowers",
+      "weapons"
     ],
     "Dislikes": [
-      "fish",
-      "dust"
+      "dust",
+      "snakes"
     ],
-    "CurrentHP": 14,
-    "CurrentMP": 16,
-    "MaxHP": 22,
-    "Mana": 16,
-    "Strength": 3,
-    "Agility": 7,
-    "Endurance": 4,
-    "Intelligence": 5,
-    "Charisma": 8,
-    "Perception": 4,
-    "Luck": 6,
-    "Evasion": 6,
+    "CurrentHP": 19,
+    "CurrentMP": 15,
+    "MaxHP": 19,
+    "MaxMana": 15,
+    "Strength": 7,
+    "Agility": 3,
+    "Endurance": 8,
+    "Intelligence": 10,
+    "Charisma": 5,
+    "Perception": 6,
+    "Luck": 5,
+    "Evasion": 10,
     "Inventory": {
-      "Gold": 13,
       "EquippedWeapon": {
-        "Name": "Angry Cat",
-        "MinDamage": 2,
-        "MaxDamage": 4,
-        "MissChance": 0.16384218613752588,
-        "CritChance": 0.23264142786136524,
+        "Name": "Bone Club",
+        "MinDamage": 5,
+        "MaxDamage": 9,
+        "MissChance": 0.11623072013286263,
+        "CritChance": 0.12070613107897692,
         "AttackDescriptions": [
-          "throws a hissing cat at your face",
-          "scratches wildly while yowling",
-          "unleashes feline fury"
+          "clobbers with ancient bone",
+          "swings wildly",
+          "cracks the air with bone"
         ]
       },
+      "Gold": 10,
       "weapons": [
         {
-          "Name": "Angry Cat",
-          "MinDamage": 2,
-          "MaxDamage": 4,
-          "MissChance": 0.16384218613752588,
-          "CritChance": 0.23264142786136524,
+          "Name": "Bone Club",
+          "MinDamage": 5,
+          "MaxDamage": 9,
+          "MissChance": 0.11623072013286263,
+          "CritChance": 0.12070613107897692,
           "AttackDescriptions": [
-            "throws a hissing cat at your face",
-            "scratches wildly while yowling",
-            "unleashes feline fury"
+            "clobbers with ancient bone",
+            "swings wildly",
+            "cracks the air with bone"
           ]
         }
-      ]
+      ],
+      "items": {}
     }
   }
 }
