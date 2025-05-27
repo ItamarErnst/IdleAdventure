@@ -88,4 +88,21 @@ public static class EnemyFactory
 
         return new Enemy(name, hp, mana, evasion, minDmg, maxDmg, attacks, encounter, death, win);
     }
+    
+    
+    public static Enemy CreateSpecific(string name)
+    {
+        var enemy = templates.FirstOrDefault(e => e.name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        if (enemy == default)
+            throw new ArgumentException($"Enemy not found: {name}");
+        
+        int hp = rand.Next(10, 20);
+        int mana = rand.Next(0, 10);
+        int evasion = rand.Next(0, 10);
+        int minDmg = rand.Next(1, 3);
+        int maxDmg = rand.Next(minDmg + 1, minDmg + 5);
+        
+        return new Enemy(name, hp, mana, evasion, minDmg, maxDmg, enemy.attacks, enemy.encounter, enemy.death, enemy.win);
+    }
+    
 }

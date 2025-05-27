@@ -5,7 +5,7 @@ class ScreenManager
     private int originalCursorTop;
     private int originalCursorLeft;
 
-    public void ShowPauseScreen(Character character)
+    public void ShowPlayerStats(Character character)
     {
         ShowCharacterInfo(character);
         Console.WriteLine("\nPress 'P' again to resume...");

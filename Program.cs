@@ -58,16 +58,7 @@ class Program
                 var key = Console.ReadKey(true).Key;
                 if (key == ConsoleKey.P)
                 {
-                    paused = !paused;
-                    if (paused)
-                    {
-                        adventureManager.Pause();
-                        screenManager.ShowPauseScreen(character);
-                    }
-                    else
-                    {
-                        adventureManager.Resume();
-                    }
+                    screenManager.ShowPlayerStats(character);
                 }
             }
 
