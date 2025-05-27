@@ -77,18 +77,6 @@ namespace IdleAdventure.Areas
                 })
                 .Build();
 
-            var path = new PathEvent(null, fluff);
-            path.FollowUps.AddRange(new AdventureEvent[]
-            {
-                path, path, path,
-                treasure,
-                enemy,
-                rare1,
-                rare2,
-                exit // 👈 inserted here to occasionally trigger
-            });
-
-
             cave.AddEvents(new AdventureEvent[]
             {
                 path,path,path,path,
