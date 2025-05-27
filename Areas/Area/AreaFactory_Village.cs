@@ -48,26 +48,23 @@ namespace IdleAdventure.Areas
                 .Describe("You reached the edge of the village and you see the meadow field.")
                 .WithTransition("MeadowField", 0.7)
                 .Build();
-
-            street.FollowUps.AddRange(new[]
+            
+            var healingFountain = new AdventureEvent(
+                "You find a sparkling healing fountain.",
+                c => c.HealHP(10)
+            )
             {
-                street,
-                npcTalk,
-                gold,
-                rare1,
-                rare2,
-                exitToMeadow,
-                inn
-            });
+                Condition = c => c.CurrentHP < c.MaxHP / 2
+            };
 
-            village.Events.AddRange(new AdventureEvent[]
+            village.AddEvents(new AdventureEvent[]
             {
                 street,street,street,
                 npcTalk,
                 gold,
                 inn
             });
-
+            
             return village;
         }
     }

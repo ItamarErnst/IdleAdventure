@@ -52,17 +52,7 @@ namespace IdleAdventure.Areas
                 .WithAction(c=> c.HealHP(6))
                 .Build();
 
-            road.FollowUps.AddRange(new[]
-            {
-                road,road,
-                seeCave,
-                seeVillage,
-                enemy,
-                rare1,
-                rare2
-            });
-
-            meadow.Events.AddRange(new AdventureEvent[]
+            meadow.AddEvents(new AdventureEvent[]
             {
                 road,road,road,road,
                 seeCave,

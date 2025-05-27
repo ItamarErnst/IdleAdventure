@@ -59,20 +59,37 @@ namespace IdleAdventure.Areas
             
             var exit = EventBuilder
                 .Describe("You see a faint light — the cave exit!")
-                .WithChanceOutcome(0.3, new[] { toMeadow,toVillage }, new[] { path })
+                .WithAction(c =>
+                {
+                    if (Random.Shared.NextDouble() < 0.3)
+                    {
+                        ColorText.WriteLine("You decide to walk toward it...", ConsoleColor.Gray);
+
+                        // 50/50 which area you reach
+                        var next = Random.Shared.NextDouble() < 0.5 ? toMeadow : toVillage;
+                        next.Execute(c);
+                    }
+                    else
+                    {
+                        ColorText.WriteLine("You hesitate and continue exploring instead.", ConsoleColor.DarkGray);
+                        Thread.Sleep(GlobalTimer.EventTimer);
+                    }
+                })
                 .Build();
 
-            path.FollowUps.AddRange(new[]
+            var path = new PathEvent(null, fluff);
+            path.FollowUps.AddRange(new AdventureEvent[]
             {
-                path,path,
+                path, path, path,
                 treasure,
                 enemy,
                 rare1,
                 rare2,
-                exit
+                exit // 👈 inserted here to occasionally trigger
             });
 
-            cave.Events.AddRange(new AdventureEvent[]
+
+            cave.AddEvents(new AdventureEvent[]
             {
                 path,path,path,path,
                 enemy,
