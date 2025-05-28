@@ -1,61 +1,79 @@
 {
   "Character": {
-    "CurrentArea": "Shore",
-    "LastDeathTime": "2025-05-28T21:00:42.5247253+02:00",
+    "Stats": {
+      "PhysicalDamageBonus": 2,
+      "DodgeChance": 5,
+      "CriticalHitChance": 2,
+      "MaximumHP": 160,
+      "MaximumMP": 90,
+      "MagicPower": 1.25,
+      "PhysicalDefense": 5,
+      "MagicalDefense": 5,
+      "DetectionRadius": 14,
+      "TrapDetectionChance": 5,
+      "StealthLevel": 7,
+      "MerchantPriceModifier": 0.93,
+      "ReputationGainModifier": 3,
+      "PhysicalSynergyBonus": 2,
+      "MagicalSynergyBonus": 2,
+      "CriticalSynergyBonus": 1
+    },
+    "CurrentArea": "DarkCave",
+    "LastDeathTime": "2025-05-28T21:40:42.9485895+02:00",
     "Level": 1,
-    "CurrentXP": 3,
+    "CurrentXP": 18,
     "XPToNextLevel": 100,
-    "Name": "Silas",
-    "Gender": "Fluid",
-    "Height": 194,
-    "Weight": 81,
-    "BodyType": "Bulky",
-    "Profession": "Warrior",
+    "Name": "Thorne",
+    "Gender": "Other",
+    "Height": 151,
+    "Weight": 68,
+    "BodyType": "Athletic",
+    "Profession": "Paladin",
     "Likes": [
-      "weapons",
+      "fame",
       "books"
     ],
     "Dislikes": [
-      "bureaucracy",
-      "fish"
+      "fish",
+      "darkness"
     ],
-    "CurrentHP": 22,
-    "CurrentMP": 2,
-    "MaxHP": 24,
-    "MaxMana": 2,
-    "Strength": 3,
-    "Agility": 8,
+    "CurrentHP": 11,
+    "CurrentMP": 3,
+    "MaxHP": 19,
+    "MaxMana": 3,
+    "Strength": 4,
+    "Agility": 7,
     "Endurance": 6,
     "Intelligence": 5,
-    "Charisma": 4,
-    "Perception": 9,
-    "Luck": 9,
-    "Evasion": 10,
+    "Charisma": 7,
+    "Perception": 7,
+    "Luck": 3,
+    "Evasion": 3,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Fire Wand",
-        "MinDamage": 4,
-        "MaxDamage": 7,
-        "MissChance": 0.15115603376191056,
-        "CritChance": 0.2631092636831523,
+        "Name": "Angry Cat",
+        "MinDamage": 3,
+        "MaxDamage": 4,
+        "MissChance": 0.1147514014657523,
+        "CritChance": 0.3939103137951418,
         "AttackDescriptions": [
-          "launches a fireball",
-          "casts a burning spark",
-          "unleashes searing heat"
+          "throws a hissing cat at your face",
+          "scratches wildly while yowling",
+          "unleashes feline fury"
         ]
       },
-      "Gold": 13,
+      "Gold": 18,
       "weapons": [
         {
-          "Name": "Fire Wand",
-          "MinDamage": 4,
-          "MaxDamage": 7,
-          "MissChance": 0.15115603376191056,
-          "CritChance": 0.2631092636831523,
+          "Name": "Angry Cat",
+          "MinDamage": 3,
+          "MaxDamage": 4,
+          "MissChance": 0.1147514014657523,
+          "CritChance": 0.3939103137951418,
           "AttackDescriptions": [
-            "launches a fireball",
-            "casts a burning spark",
-            "unleashes searing heat"
+            "throws a hissing cat at your face",
+            "scratches wildly while yowling",
+            "unleashes feline fury"
           ]
         }
       ],

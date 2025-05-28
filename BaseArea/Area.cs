@@ -6,7 +6,8 @@ public class Area
     public string CodeName { get; }                 // Internal Key
     public string EntranceMessage { get; set; } = "";
     private readonly List<WeightedEvent> _weightedEvents = new();
-    
+    public List<AreaRequirement> Requirements { get; set; } = new();
+
     public Area(string codeName, string displayName)
     {
         CodeName = codeName;
@@ -42,5 +43,9 @@ public class Area
         // fallback (shouldn't happen)
         return eligible[rand.Next(eligible.Count)].Event;
     }
-
+    
+    public bool CanEnter(Character character)
+    {
+        return Requirements.All(req => req.CheckRequirement(character));
+    }
 }

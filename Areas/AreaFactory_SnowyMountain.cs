@@ -10,9 +10,14 @@ namespace IdleAdventure.AreaFactories
         {
             var mountain = new Area("SnowyMountain", "Snowy Mountain")
             {
-                EntranceMessage = $"{Colors.Bold}{Colors.NewArea}You begin your ascent of the snowy mountain. The air is crisp, and the silence heavy.{Colors.Reset}"
+                EntranceMessage = $"{Colors.Bold}{Colors.NewArea}You begin your ascent of the snowy mountain. The air is crisp, and the silence heavy.{Colors.Reset}",
+                Requirements = new List<AreaRequirement>
+                {
+                    new() { StatName = "Endurance", MinimumValue = 10, FailureMessage = "You need more endurance to handle the thin air." },
+                    new() { StatName = "Strength", MinimumValue = 8, FailureMessage = "You need more strength to climb these slopes." }
+                }
             };
-
+            
             mountain.AddEvents(
                 new WeightedEvent(CreatePathEvent(), 8),
                 new WeightedEvent(CreateCombatEvent(), 4),

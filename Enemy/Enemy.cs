@@ -1,3 +1,5 @@
+using IdleAdventure;
+
 public class Enemy
 {
     public string Name { get; }
@@ -7,6 +9,13 @@ public class Enemy
     public int MinDamage { get; }
     public int MaxDamage { get; }
     public List<string> AttackDescriptions { get; }
+    
+    // New stat properties
+    public int DodgeChance { get; }
+    public int PhysicalDefense { get; }
+    public bool IsCriticalHit() => Random.Shared.Next(100) < CriticalHitChance;
+    public int CriticalHitChance { get; }
+    public int XPValue { get; }  // Base XP awarded when defeated
 
     public string EncounterText { get; }
     public string DeathText { get; }
@@ -22,7 +31,11 @@ public class Enemy
         List<string> attackDescs,
         string encounterText,
         string deathText,
-        string winText)
+        string winText,
+        // New constructor parameters
+        int dodgeChance = 5,
+        int physicalDefense = 10,
+        int criticalHitChance = 5) 
     {
         Name = name;
         HP = hp;
@@ -35,11 +48,25 @@ public class Enemy
         EncounterText = encounterText;
         DeathText = deathText;
         WinText = winText;
+
+        // Initialize new stats
+        DodgeChance = dodgeChance;
+        PhysicalDefense = physicalDefense;
+        CriticalHitChance = criticalHitChance;
     }
 
     public int GetDamage(Random rand)
     {
-        return rand.Next(MinDamage, MaxDamage + 1);
+        int damage = rand.Next(MinDamage, MaxDamage + 1);
+        
+        // Apply critical hit if rolled
+        if (IsCriticalHit())
+        {
+            damage = (int)(damage * 1.5f);
+            ColorText.WriteLine($"{Name} lands a critical hit!", Colors.Critical);
+        }
+        
+        return damage;
     }
 
     public string GetRandomAttackDescription(Random rand)

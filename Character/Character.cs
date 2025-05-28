@@ -5,6 +5,8 @@ namespace IdleAdventure;
 
 public class Character
 {
+    public StatCalculator Stats { get; private set; }
+
     public string CurrentArea { get; set; }
     public DateTime? LastDeathTime { get; set; } = DateTime.Now;
     public int Level { get; private set; } = 1;
@@ -46,11 +48,24 @@ public class Character
         Profession = "None";
         Likes = new List<string>();
         Dislikes = new List<string>();
+        
+        Stats = new StatCalculator(this);
+        UpdateDerivedStats();
     }
-
+    
     public Weapon GetEquippedWeapon()
     {
         return Inventory.GetWeapon();
+    }
+    
+    private void UpdateDerivedStats()
+    {
+        MaxHP = Stats.MaximumHP;
+        MaxMana = Stats.MaximumMP;
+        
+        // Initialize HP/MP if they're 0 (new character)
+        if (CurrentHP == 0) CurrentHP = MaxHP;
+        if (CurrentMP == 0) CurrentMP = MaxMana;
     }
     
     public void GainXP(int amount)
@@ -74,6 +89,9 @@ public class Character
 
         int statPoints = 3;
         DistributeStatPoints(statPoints);
+        UpdateDerivedStats();
+
+        HealFull();
     }
 
     private void DistributeStatPoints(int points)
