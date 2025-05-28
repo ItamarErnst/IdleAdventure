@@ -97,6 +97,7 @@ namespace IdleAdventure.AreaFactories
                 .AddExit("You step into a cold, ancient chamber...", "ForgottenCrypt", 0.2)
                 .AddExit("You enter a nearby village.", "Village", 0.4)
                 .AddExit("A narrow, damp tunnel leads into a rotting marshland.", "Swamp", 0.1)
+                .AddExit("You hear waves crashing — a narrow tunnel leads to the shore.", "Shore", 0.4)
                 .Build(rand);
         }
 

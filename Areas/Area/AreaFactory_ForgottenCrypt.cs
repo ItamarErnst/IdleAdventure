@@ -76,8 +76,9 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateExitEvent()
         {
             return new ExitEventBuilder("You discover branching paths in the ancient crypt...")
-                .AddExit("A mysterious staircase rises, impossibly, toward the sky.", "FloatingRuins", 0.05)
+                .AddExit("A mysterious staircase rises, impossibly, toward the sky.", "FloatingRuins", 0.1)
                 .AddExit("You emerge into a quiet village square.", "Village", 0.1)
+                .AddExit("A cracked stairway ascends toward a regal chamber.", "RoyalMansion", 0.2)
                 .MainExit("You descend deeper and find yourself in the Dark Cave.", "DarkCave")
                 .Build(rand);
         }

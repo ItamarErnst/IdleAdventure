@@ -6,6 +6,7 @@ namespace IdleAdventure;
 public class Character
 {
     public string CurrentArea { get; set; }
+    public DateTime? LastDeathTime { get; set; } = DateTime.Now;
     public int Level { get; private set; } = 1;
     public int CurrentXP { get; private set; } = 0;
     public int XPToNextLevel => Level * 100;

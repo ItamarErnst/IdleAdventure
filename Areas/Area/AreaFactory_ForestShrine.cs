@@ -94,6 +94,7 @@ namespace IdleAdventure.AreaFactories
                 .AddExit("You stumble into the Forgotten Crypt.", "ForgottenCrypt", 0.1)
                 .AddExit("You see a small village through the trees.", "Village", 0.1)
                 .AddExit("You find a hidden path to a dark cave.", "DarkCave", 0.1)
+                .AddExit("You follow a mossy path deeper into the woods — it smells like death.", "Graveyard", 0.1)
                 .MainExit("You arrive at the edge of the MeadowField.", "MeadowField")
                 .Build(rand);
         }

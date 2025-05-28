@@ -89,7 +89,8 @@ public class AdventureManager
             await Task.Delay(GlobalTimer.EventTimer);
         }
 
-        // This signals RunAsync finished (e.g. HP <= 0)
-        OnPlayerDeath?.Invoke();
+        character.LastDeathTime = DateTime.UtcNow; // mark death time
+        SaveData.SaveGame(character);              // persist it to file
+        OnPlayerDeath?.Invoke();                   // notify death
     }
 }

@@ -1,64 +1,67 @@
 {
   "Character": {
-    "CurrentArea": "MeadowField",
+    "CurrentArea": "ForestShrine",
+    "LastDeathTime": "2025-05-28T15:40:58.1682025Z",
     "Level": 1,
-    "CurrentXP": 0,
+    "CurrentXP": 99,
     "XPToNextLevel": 100,
-    "Name": "Elira",
-    "Gender": "Male",
-    "Height": 191,
-    "Weight": 76,
+    "Name": "Silas",
+    "Gender": "Fluid",
+    "Height": 164,
+    "Weight": 103,
     "BodyType": "Average",
-    "Profession": "Necromancer",
+    "Profession": "Hunter",
     "Likes": [
-      "strategy",
-      "books"
+      "flowers",
+      "cake"
     ],
     "Dislikes": [
-      "noise",
-      "dust"
+      "dust",
+      "heat"
     ],
-    "CurrentHP": 21,
-    "CurrentMP": 10,
-    "MaxHP": 21,
-    "MaxMana": 10,
-    "Strength": 6,
-    "Agility": 5,
-    "Endurance": 6,
+    "CurrentHP": -1,
+    "CurrentMP": 2,
+    "MaxHP": 24,
+    "MaxMana": 2,
+    "Strength": 7,
+    "Agility": 4,
+    "Endurance": 10,
     "Intelligence": 9,
-    "Charisma": 4,
-    "Perception": 6,
-    "Luck": 3,
-    "Evasion": 4,
+    "Charisma": 10,
+    "Perception": 3,
+    "Luck": 10,
+    "Evasion": 6,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Spiked Club",
-        "MinDamage": 5,
-        "MaxDamage": 9,
-        "MissChance": 0.21618990140570438,
-        "CritChance": 0.06208831368858894,
+        "Name": "Unarmed",
+        "MinDamage": 1,
+        "MaxDamage": 3,
+        "MissChance": 0.1511002690004176,
+        "CritChance": 0.0765727355869938,
         "AttackDescriptions": [
-          "smashes down brutally",
-          "bashes with spikes",
-          "slams recklessly"
+          "throws a desperate punch",
+          "kicks awkwardly",
+          "flails wildly"
         ]
       },
-      "Gold": 10,
+      "Gold": 34,
       "weapons": [
         {
-          "Name": "Spiked Club",
-          "MinDamage": 5,
-          "MaxDamage": 9,
-          "MissChance": 0.21618990140570438,
-          "CritChance": 0.06208831368858894,
+          "Name": "Unarmed",
+          "MinDamage": 1,
+          "MaxDamage": 3,
+          "MissChance": 0.1511002690004176,
+          "CritChance": 0.0765727355869938,
           "AttackDescriptions": [
-            "smashes down brutally",
-            "bashes with spikes",
-            "slams recklessly"
+            "throws a desperate punch",
+            "kicks awkwardly",
+            "flails wildly"
           ]
         }
       ],
-      "items": {}
+      "items": {
+        "Enchanted Herb": 1
+      }
     }
   }
 }

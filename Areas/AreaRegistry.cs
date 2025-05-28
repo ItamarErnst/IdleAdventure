@@ -4,6 +4,24 @@ namespace IdleAdventure.Areas
     {
         private readonly Dictionary<string, IAreaFactory> _factories;
 
+        // ✅ Define valid starting and recovery area codes
+        private static readonly HashSet<string> StartingAreas = new()
+        {
+            "MeadowField",
+            "Graveyard",
+            "RoyalMansion",
+            "Shore"
+        };
+
+        private static readonly HashSet<string> RecoveryAreas = new()
+        {
+            "MeadowField",
+            "Village",
+            "ForestShrine"
+        };
+
+        private readonly Random rand = Random.Shared;
+
         public AreaRegistry()
         {
             _factories = DiscoverFactories();
@@ -50,5 +68,19 @@ namespace IdleAdventure.Areas
         }
 
         public IEnumerable<string> AllAreaNames => _factories.Keys;
+
+        // ✅ Random starting area
+        public string GetRandomStartingArea()
+        {
+            var options = _factories.Keys.Where(name => StartingAreas.Contains(name)).ToList();
+            return options.Count > 0 ? options[rand.Next(options.Count)] : throw new Exception("No valid starting areas found.");
+        }
+
+        // ✅ Random recovery area
+        public string GetRandomRecoveryArea()
+        {
+            var options = _factories.Keys.Where(name => RecoveryAreas.Contains(name)).ToList();
+            return options.Count > 0 ? options[rand.Next(options.Count)] : throw new Exception("No valid recovery areas found.");
+        }
     }
 }
