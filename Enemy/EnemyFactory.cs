@@ -80,16 +80,16 @@ public static class EnemyFactory
     {
         var (name, attacks, encounter, death, win) = templates[rand.Next(templates.Count)];
 
-        int hp = rand.Next(10, 20);
+        int hp = rand.Next(10, 80);
         int mana = rand.Next(0, 10);
-        int evasion = rand.Next(0, 10);
-        int minDmg = rand.Next(1, 3);
-        int maxDmg = rand.Next(minDmg + 1, minDmg + 5);
+        int evasion = rand.Next(-5, 10);
+        int minDmg = rand.Next(3, 10);
+        int maxDmg = rand.Next(minDmg + 2, minDmg + 5);
     
         // New random stats
-        int dodgeChance = rand.Next(3, 8);          // 3-7% dodge chance
-        int physicalDefense = rand.Next(5, 11);     // 5-10 physical defense
-        int criticalHitChance = rand.Next(3, 6);    // 3-5% crit chance
+        int dodgeChance = rand.Next(0, 7);          // 3-7% dodge chance
+        int physicalDefense = rand.Next(-5, 11);     // 5-10 physical defense
+        int criticalHitChance = rand.Next(0, 6);    // 3-5% crit chance
 
         return new Enemy(
             name, 

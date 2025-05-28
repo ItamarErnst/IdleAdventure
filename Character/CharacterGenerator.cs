@@ -42,7 +42,7 @@ public static class CharacterGenerator
             Profession = professions[rand.Next(professions.Length)],
             Likes = likes.OrderBy(_ => rand.Next()).Take(2).ToList(),
             Dislikes = dislikes.OrderBy(_ => rand.Next()).Take(2).ToList(),
-            MaxHP = rand.Next(15, 30),
+            MaxHP = rand.Next(20, 80),
             MaxMana = rand.Next(0, 25),
 
             Strength = rand.Next(3, 11),
