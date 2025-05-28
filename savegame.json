@@ -1,10 +1,10 @@
 {
   "Character": {
-    "CurrentArea": "ForestShrine",
-    "LastDeathTime": "2025-05-28T15:40:58.1682025Z",
-    "Level": 1,
-    "CurrentXP": 99,
-    "XPToNextLevel": 100,
+    "CurrentArea": "DarkCave",
+    "LastDeathTime": "2025-05-28T16:33:40.8406069Z",
+    "Level": 2,
+    "CurrentXP": 47,
+    "XPToNextLevel": 200,
     "Name": "Silas",
     "Gender": "Fluid",
     "Height": 164,
@@ -19,14 +19,14 @@
       "dust",
       "heat"
     ],
-    "CurrentHP": -1,
+    "CurrentHP": 0,
     "CurrentMP": 2,
     "MaxHP": 24,
     "MaxMana": 2,
     "Strength": 7,
-    "Agility": 4,
-    "Endurance": 10,
-    "Intelligence": 9,
+    "Agility": 5,
+    "Endurance": 11,
+    "Intelligence": 10,
     "Charisma": 10,
     "Perception": 3,
     "Luck": 10,
@@ -44,7 +44,7 @@
           "flails wildly"
         ]
       },
-      "Gold": 34,
+      "Gold": 50,
       "weapons": [
         {
           "Name": "Unarmed",
