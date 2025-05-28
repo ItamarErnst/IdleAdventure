@@ -14,7 +14,7 @@ namespace IdleAdventure.AreaFactories
             var rand = Random.Shared;
 
             // 🔹 PATH
-            var shrinePath = new PathEvent(null, new[]
+            var path = new PathEvent(null, new[]
             {
                 "You hear birds chirping in the distance.",
                 "Sunlight peeks through thick canopies.",
@@ -40,43 +40,32 @@ namespace IdleAdventure.AreaFactories
             };
 
             // 🔹 COMBAT
-            var combatEvent = EventBuilder
-                .Describe("A Forest Guardian emerges from the shadows...")
-                .WithAction(character =>
+            var combatEvent = new CombatBuilder()
+                .OnWin(c =>
                 {
-                    var onWin = new AdventureEvent("The guardian falls. You gain experience.", c =>
-                    {
-                        c.GainXP(rand.Next(3, 6));
-                        c.Inventory.AddGold(rand.Next(3, 6));
-                    });
-
-                    onWin.AddNext(new AdventureEvent("You find a glowing relic among the ruins.", c => c.Inventory.AddItem("Relic"))
-                    {
-                        Eligibility = _ => rand.NextDouble() < 0.05
-                    });
-
-                    CombatSystem.Run(
-                        character,
-                        enemyFactory: EnemyFactory.CreateRandom,
-                        onWin: onWin,
-                        onLose: new AdventureEvent("You retreat, wounded and humbled...")
-                    );
+                    c.GainXP(rand.Next(5, 10));
+                    c.Inventory.AddGold(rand.Next(2, 3));
+                })
+                .WithRareDrop(new AdventureEvent("Tucked within the roots of an old tree, you find an ancient bark talisman.", c =>
+                    c.Inventory.AddItem("Bark Talisman"))
+                {
+                    Eligibility = _ => rand.NextDouble() < 0.05
                 })
                 .Build();
 
             // 🔹 EXIT
-            
-
-            // Forest Shrine → Meadow
-            var exitToMeadow = new ExitEventBuilder("You follow a worn path leading back to the meadows.")
-                .AddExit("You arrive at the edge of the MeadowField.", "MeadowField")
+            var exit = new ExitEventBuilder("You follow a worn path leading back to the meadows.")
+                .AddExit("You stumble into the Forgotten Crypt.", "ForgottenCrypt", 0.1)
+                .AddExit("You see a small village through the trees.", "Village", 0.1)
+                .AddExit("You find a hidden path to a dark cave.", "DarkCave", 0.1)
+                .MainExit("You arrive at the edge of the MeadowField.", "MeadowField")
                 .Build(rand);
-            shrinePath.AddNext(exitToMeadow, _ => rand.NextDouble() < 0.1);
-
             
+            path.AddNext(exit, _ => rand.NextDouble() < 0.15);
+
             
             forest.AddEvents(
-                new WeightedEvent(shrinePath, 4),
+                new WeightedEvent(path, 10),
                 new WeightedEvent(combatEvent, 6),
                 new WeightedEvent(mysticPond, 2),
                 new WeightedEvent(enchantedHerb, 2),

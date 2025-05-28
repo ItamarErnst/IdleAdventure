@@ -5,6 +5,7 @@ public class ExitEventBuilder
 {
     private readonly string _discoveryText;
     private readonly List<(string transitionDescription, string targetArea, double chance)> _exits = new();
+    private (string desc, string area)? _mainExit;
 
     public ExitEventBuilder(string discoveryText)
     {
@@ -16,37 +17,42 @@ public class ExitEventBuilder
         _exits.Add((transitionDescription, targetArea, chance));
         return this;
     }
-
+    
+    public ExitEventBuilder MainExit(string description, string areaName)
+    {
+        _mainExit = (description, areaName);
+        return this;
+    }
+    
     public AdventureEvent Build(Random rand)
     {
-        var discovery = new AdventureEvent(
-            _discoveryText,
-            c => ColorText.WriteLine("You decide to walk toward it...", ConsoleColor.Gray)
-        );
-
-        bool added = false;
-
-        foreach (var (desc, area, chance) in _exits)
+        return new AdventureEvent(_discoveryText, c =>
         {
-            var transition = EventBuilder
-                .Describe(desc)
-                .WithTransition(area, 1)
-                .Build();
+            Thread.Sleep(GlobalTimer.EventTimer);
 
-            discovery.AddNext(transition, _ =>
+            // Attempt all exits in random order
+            var shuffled = _exits.OrderBy(_ => rand.Next()).ToList();
+            foreach (var (desc, area, chance) in shuffled)
             {
-                bool success = rand.NextDouble() < chance;
-                if (success) added = true;
-                return success;
-            });
-        }
+                if (rand.NextDouble() < chance)
+                {
+                    ColorText.WriteLine(desc, ConsoleColor.White);
+                    c.CurrentArea = area;
+                    return;
+                }
+            }
 
-        // Add fallback if nothing was selected
-        discovery.AddNext(
-            new AdventureEvent("You wander a bit, but find nothing of interest."),
-            _ => !added
-        );
-
-        return discovery;
+            // Fallback: main or default
+            if (_mainExit != null)
+            {
+                var (desc, area) = _mainExit.Value;
+                ColorText.WriteLine(desc, ConsoleColor.White);
+                c.CurrentArea = area;
+            }
+            else
+            {
+                ColorText.WriteLine("-- You decided to ignore it.", ConsoleColor.DarkGray);
+            }
+        });
     }
 }

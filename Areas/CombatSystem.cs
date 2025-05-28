@@ -68,12 +68,10 @@ public static class CombatSystem
         Thread.Sleep(GlobalTimer.TurnTimer / 2);
         if (character.CurrentHP <= 0)
         {
-            ColorText.WriteLine(enemy.WinText, ConsoleColor.DarkRed);
             onLose?.Execute(character);
         }
         else
         {
-            ColorText.WriteLine(enemy.DeathText, ConsoleColor.Green);
             onWin?.Execute(character);
         }
     }

@@ -6,7 +6,6 @@ namespace IdleAdventure.Areas
     {
         private string _description = string.Empty;
         private Action<Character>? _action;
-        private double? _transitionChance;
 
         public class SkipEventExecution : Exception {}
 
@@ -15,27 +14,14 @@ namespace IdleAdventure.Areas
             return new EventBuilder { _description = description };
         }
         
+        public static EventBuilder FromAction(Action<Character> action)
+        {
+            return new EventBuilder().WithAction(action);
+        }
+        
         public EventBuilder WithAction(Action<Character> action)
         {
             _action = action;
-            return this;
-        }
-
-        public EventBuilder WithTransition(string area, double chance = 1.0)
-        {
-            _transitionChance = chance;
-            _action = (c) =>
-            {
-                if (Random.Shared.NextDouble() <= chance)
-                {
-                    c.CurrentArea = area;
-                }
-                else
-                {
-                    Thread.Sleep(GlobalTimer.EventTimer);
-                    ColorText.WriteLine("-- You decided to ignore it.", ConsoleColor.DarkGray);
-                }
-            };
             return this;
         }
 

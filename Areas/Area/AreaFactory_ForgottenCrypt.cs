@@ -14,7 +14,7 @@ namespace IdleAdventure.AreaFactories
             var rand = Random.Shared;
 
             // 🔹 PATH
-            var cryptPath = new PathEvent(null, new[]
+            var path = new PathEvent(null, new[]
             {
                 "Your footsteps echo ominously down the stone corridor.",
                 "Dust and cobwebs coat every surface.",
@@ -49,41 +49,29 @@ namespace IdleAdventure.AreaFactories
             };
 
             // 🔹 COMBAT
-            var combatEvent = EventBuilder
-                .Describe("An undead warrior blocks your path...")
-                .WithAction(character =>
+            var combatEvent = new CombatBuilder()
+                .OnWin(c =>
                 {
-                    var onWin = new AdventureEvent("The undead fall. You loot their remains.", c =>
-                    {
-                        c.GainXP(rand.Next(4, 8));
-                        c.Inventory.AddGold(rand.Next(5, 10));
-                    });
-
-                    onWin.AddNext(new AdventureEvent("You find a rare obsidian pendant hidden in the bone pile.", c => c.Inventory.AddItem("Obsidian Pendant"))
-                    {
-                        Eligibility = _ => rand.NextDouble() < 0.05
-                    });
-
-                    CombatSystem.Run(
-                        character,
-                        enemyFactory: EnemyFactory.CreateRandom,
-                        onWin: onWin,
-                        onLose: new AdventureEvent("You flee into the darkness, barely clinging to life...")
-                    );
+                    c.GainXP(rand.Next(4, 8));
+                    c.Inventory.AddGold(rand.Next(5, 10));
+                })
+                .WithRareDrop(new AdventureEvent("You find a rare obsidian pendant hidden in the bone pile.", c =>
+                    c.Inventory.AddItem("Obsidian Pendant"))
+                {
+                    Eligibility = _ => rand.NextDouble() < 0.05
                 })
                 .Build();
 
             // 🔹 EXIT
-            // Crypt → Village
-            var exitToVillage = new ExitEventBuilder("You find a forgotten tunnel leading toward a distant village.")
-                .AddExit("You emerge into a quiet village square.", "Village")
+            var exit = new ExitEventBuilder("You discover branching paths in the ancient crypt...")
+                .AddExit("You emerge into a quiet village square.", "Village", 0.1)
+                .MainExit("You descend deeper and find yourself in the Dark Cave.", "DarkCave")
                 .Build(rand);
-            cryptPath.AddNext(exitToVillage, _ => rand.NextDouble() < 0.05);
 
-
+            path.AddNext(exit, _ => rand.NextDouble() < 0.1);
 
             crypt.AddEvents(
-                new WeightedEvent(cryptPath, 4),
+                new WeightedEvent(path, 10),
                 new WeightedEvent(combatEvent, 6),
                 new WeightedEvent(darkAltar, 2),
                 new WeightedEvent(boneCharm, 1),

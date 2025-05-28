@@ -1,60 +1,60 @@
 {
   "Character": {
-    "CurrentArea": "MeadowField",
+    "CurrentArea": "ForgottenCrypt",
     "Level": 1,
     "CurrentXP": 0,
     "XPToNextLevel": 100,
-    "Name": "Thorne",
-    "Gender": "Other",
-    "Height": 151,
-    "Weight": 114,
+    "Name": "Elira",
+    "Gender": "Female",
+    "Height": 199,
+    "Weight": 50,
     "BodyType": "Slim",
-    "Profession": "Bard",
+    "Profession": "Thief",
     "Likes": [
-      "flowers",
-      "weapons"
+      "weapons",
+      "fame"
     ],
     "Dislikes": [
-      "dust",
-      "snakes"
+      "waiting",
+      "bureaucracy"
     ],
-    "CurrentHP": 19,
-    "CurrentMP": 15,
-    "MaxHP": 19,
-    "MaxMana": 15,
-    "Strength": 7,
-    "Agility": 3,
-    "Endurance": 8,
-    "Intelligence": 10,
-    "Charisma": 5,
-    "Perception": 6,
-    "Luck": 5,
-    "Evasion": 10,
+    "CurrentHP": 18,
+    "CurrentMP": 9,
+    "MaxHP": 18,
+    "MaxMana": 9,
+    "Strength": 3,
+    "Agility": 9,
+    "Endurance": 6,
+    "Intelligence": 6,
+    "Charisma": 4,
+    "Perception": 10,
+    "Luck": 4,
+    "Evasion": 9,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Bone Club",
-        "MinDamage": 5,
-        "MaxDamage": 9,
-        "MissChance": 0.11623072013286263,
-        "CritChance": 0.12070613107897692,
+        "Name": "Rusty Sword",
+        "MinDamage": 4,
+        "MaxDamage": 8,
+        "MissChance": 0.08169290623890377,
+        "CritChance": 0.1080742274685903,
         "AttackDescriptions": [
-          "clobbers with ancient bone",
+          "slashes clumsily",
           "swings wildly",
-          "cracks the air with bone"
+          "stabs forward"
         ]
       },
       "Gold": 10,
       "weapons": [
         {
-          "Name": "Bone Club",
-          "MinDamage": 5,
-          "MaxDamage": 9,
-          "MissChance": 0.11623072013286263,
-          "CritChance": 0.12070613107897692,
+          "Name": "Rusty Sword",
+          "MinDamage": 4,
+          "MaxDamage": 8,
+          "MissChance": 0.08169290623890377,
+          "CritChance": 0.1080742274685903,
           "AttackDescriptions": [
-            "clobbers with ancient bone",
+            "slashes clumsily",
             "swings wildly",
-            "cracks the air with bone"
+            "stabs forward"
           ]
         }
       ],

@@ -12,7 +12,7 @@ namespace IdleAdventure.Areas
             var rand = Random.Shared;
 
             // 🔹 PATH
-            var meadowPath = new PathEvent(null, new[]
+            var path = new PathEvent(null, new[]
             {
                 "You hear birds chirping cheerfully.",
                 "A butterfly flits past your face.",
@@ -51,40 +51,35 @@ namespace IdleAdventure.Areas
             };
 
             // 🔹 COMBAT
-            var combatEvent = EventBuilder
-                .Describe("You hear unsettling sounds from the shadows...")
-                .WithAction(character =>
+            var combatEvent = new CombatBuilder()
+                .OnWin(c =>
                 {
-                    var onWin = new AdventureEvent("Victory rewards your bravery.", c =>
-                    {
-                        c.GainXP(5);
-                        c.Inventory.AddGold(3);
-                    });
-                    
-                    CombatSystem.Run(
-                        character,
-                        enemyFactory: EnemyFactory.CreateRandom,
-                        onWin: onWin,
-                        onLose: new AdventureEvent("You collapse in the darkness...")
-                    );
+                    c.GainXP(rand.Next(1, 5));
+                    c.Inventory.AddGold(rand.Next(1, 5));
+                })
+                .WithRareDrop(new AdventureEvent("Among the tall grass, you uncover a delicate flower glowing faintly.", c =>
+                    c.Inventory.AddItem("Luminous Petal"))
+                {
+                    Eligibility = _ => rand.NextDouble() < 0.05
                 })
                 .Build();
 
             // 🔹 EXITS
-            // Meadow → Cave + Village
-            var meadowExits = new ExitEventBuilder("You notice paths branching away from the meadow.")
-                .AddExit("You spot a dark cave entrance nearby.", "DarkCave", 0.1)
-                .AddExit("You see a small village in the distance.", "Village", 0.1)
+            var exit = new ExitEventBuilder("You notice paths branching away from the meadow.")
+                .MainExit("You see a small village in the distance.", "Village")
+                .AddExit("You spot a dark cave entrance nearby.", "DarkCave", 0.5)
+                .AddExit("You hear a whisper from the woods beyond...", "ForestShrine", 0.3)
+                .AddExit("A chill runs down your spine — an overgrown crypt lies hidden in the grass.", "ForgottenCrypt", 0.05)
                 .Build(rand);
-            meadowPath.AddNext(meadowExits);
-            
+
             meadow.AddEvents(
-                new WeightedEvent(meadowPath, 5),
-                new WeightedEvent(combatEvent, 3),
-                new WeightedEvent(rainbowHeal, 1),
-                new WeightedEvent(luckyFind, 1),
-                new WeightedEvent(oldCabin, 1),
-                new WeightedEvent(deerEncounter, 1)
+                new WeightedEvent(path, 5),
+                new WeightedEvent(exit, 2)
+                // new WeightedEvent(combatEvent, 3),
+                // new WeightedEvent(rainbowHeal, 1),
+                // new WeightedEvent(luckyFind, 1),
+                // new WeightedEvent(oldCabin, 1),
+                // new WeightedEvent(deerEncounter, 1)
             );
             
             return meadow;

@@ -12,7 +12,7 @@ namespace IdleAdventure.Areas
             var rand = Random.Shared;
 
             // 🔹 PATH
-            var streetWalk = new PathEvent(null, new[]
+            var path = new PathEvent(null, new[]
             {
                 "You hear laughter from a nearby tavern.",
                 "A cat brushes past your leg and vanishes into an alley.",
@@ -78,16 +78,18 @@ namespace IdleAdventure.Areas
             };
 
             // 🔹 EXIT
-            // Village → Meadow
-            var exitToMeadow = new ExitEventBuilder("You find a narrow trail heading toward the meadows.")
-                .AddExit("You reach the edge of the village and see the meadow field.", "MeadowField", 1.0)
+            var exit = new ExitEventBuilder("You find a narrow trail heading toward the meadows.")
+                .AddExit("You take a wrong turn and descend into the Forgotten Crypt...", "ForgottenCrypt", 0.03) // 3% chance
+                .MainExit("You reach the edge of the village and see the meadow field.", "MeadowField")
                 .Build(rand);
-            streetWalk.AddNext(exitToMeadow, c => rand.NextDouble() < 0.1);
+
+            path.AddNext(exit, c => rand.NextDouble() < 0.1);
             
             village.AddEvents(
-                new WeightedEvent(streetWalk, 4),
-                new WeightedEvent(innDecision, 3),
+                new WeightedEvent(path, 6),
                 new WeightedEvent(localChat, 3),
+                new WeightedEvent(exit, 2),
+                new WeightedEvent(innDecision, 2),
                 new WeightedEvent(streetCoins, 2),
                 new WeightedEvent(bardSong, 1),
                 new WeightedEvent(lostPet, 1)

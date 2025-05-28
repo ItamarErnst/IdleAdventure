@@ -12,7 +12,7 @@ namespace IdleAdventure.Areas
             var rand = Random.Shared;
 
             // 🔹 PATH
-            var cavePath = new PathEvent(null, new[]
+            var path = new PathEvent(null, new[]
             {
                 "You hear water dripping in the dark.",
                 "A small mouse darts across the floor.",
@@ -49,49 +49,39 @@ namespace IdleAdventure.Areas
             {
                 Eligibility = _ => rand.NextDouble() < 0.1
             };
-
+            
             // 🔹 COMBAT
-            var combatEvent = EventBuilder
-                .Describe("You hear unsettling sounds from the shadows...")
-                .WithAction(character =>
+            var combatEvent = new CombatBuilder()
+                .OnWin(c =>
                 {
-                    var bigTreasure = new AdventureEvent("You uncover a rare artifact!", c => c.Inventory.AddGold(50))
-                    {
-                        Eligibility = _ => Random.Shared.NextDouble() < 0.05
-                    };
-
-                    var onWin = new AdventureEvent("Victory rewards your bravery.", c =>
-                    {
-                        c.GainXP(5);
-                        c.Inventory.AddGold(3);
-                    });
-
-                    onWin.AddNext(bigTreasure);
-
-                    CombatSystem.Run(
-                        character,
-                        enemyFactory: EnemyFactory.CreateRandom,
-                        onWin: onWin,
-                        onLose: new AdventureEvent("You collapse in the darkness...")
-                    );
+                    c.GainXP(rand.Next(3, 4));
+                    c.Inventory.AddGold(rand.Next(1, 6));
+                })
+                .WithRareDrop(new AdventureEvent("You uncover a treasure chest!", c => c.Inventory.AddGold(50))
+                {
+                    Eligibility = _ => Random.Shared.NextDouble() < 0.02
+                })
+                .WithRareDrop(new AdventureEvent("Behind a pile of rubble, you spot a strange gem embedded in the stone.", c =>
+                    c.Inventory.AddItem("Cracked Geode"))
+                {
+                    Eligibility = _ => rand.NextDouble() < 0.05
                 })
                 .Build();
+            
 
             // 🔹 EXIT
-            var exitChance = new ExitEventBuilder("You see a faint light — the cave exit!")
-                .AddExit("You exit to the meadow.", "MeadowField", 0.5)
-                .AddExit("You step into a cold, ancient chamber...", "ForgottenCrypt", 0.5)
-                .AddExit("You enter a nearby village.", "Village", 1.0)
+            var exit = new ExitEventBuilder("You see a faint light — the cave exit!")
+                .MainExit("You exit to the meadow.", "MeadowField")
+                .AddExit("You step into a cold, ancient chamber...", "ForgottenCrypt", 0.2)
+                .AddExit("You enter a nearby village.", "Village",0.4)
                 .Build(rand);
 
-            cavePath.AddNext(exitChance, _ => rand.NextDouble() < 0.15);
-
-
+            path.AddNext(exit, _ => rand.NextDouble() < 0.1);
             
             cave.AddEvents(
-                new WeightedEvent(cavePath, 4),
-                new WeightedEvent(combatEvent, 6),
-                new WeightedEvent(treasureChest, 2),
+                new WeightedEvent(path, 10),
+                new WeightedEvent(combatEvent, 3),
+                new WeightedEvent(treasureChest, 1),
                 new WeightedEvent(glowingCrystal, 2),
                 new WeightedEvent(ancientPaintings, 1),
                 new WeightedEvent(skeletonRemains, 1)

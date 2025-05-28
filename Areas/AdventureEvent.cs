@@ -2,22 +2,32 @@ namespace IdleAdventure;
 public class AdventureEvent
 {
     public string Description { get; set; }
+    public ConsoleColor DescriptionColor { get; }
     public Action<Character>? Outcome { get; set; }
     public string? AreaTransition { get; set; }
 
     public List<NextEventLink> NextEvents { get; } = new();
     public Func<Character, bool>? Eligibility { get; set; }
 
-    public AdventureEvent(string description, Action<Character>? outcome = null, string? areaTransition = null)
+    public AdventureEvent(
+        string description,
+        Action<Character>? outcome = null,
+        string? areaTransition = null,
+        ConsoleColor descriptionColor = ConsoleColor.White)
     {
         Description = description;
         Outcome = outcome;
         AreaTransition = areaTransition;
+        DescriptionColor = descriptionColor;
     }
 
     public virtual void Execute(Character character)
     {
-        ColorText.WriteLine(Description, ConsoleColor.White);
+        if (!string.IsNullOrEmpty(Description))
+        {
+            ColorText.WriteLine(Description, DescriptionColor);
+        }
+
         Outcome?.Invoke(character);
     }
 
