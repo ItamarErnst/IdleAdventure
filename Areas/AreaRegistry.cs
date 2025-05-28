@@ -1,28 +1,54 @@
-using System;
-using System.Collections.Generic;
-using IdleAdventure.AreaFactories;
-
 namespace IdleAdventure.Areas
 {
-    public static class AreaRegistry
+    public class AreaRegistry
     {
-        private static readonly Dictionary<string, Func<Area>> _areaFactories = new()
-        {
-            { "DarkCave", AreaFactory_Cave.Create },
-            { "MeadowField", AreaFactory_Meadow.Create },
-            { "ForestShrine", AreaFactory_ForestShrine.Create },
-            { "ForgottenCrypt", AreaFactory_ForgottenCrypt.Create },
-            { "Village", AreaFactory_Village.Create }
-        };
+        private readonly Dictionary<string, IAreaFactory> _factories;
 
-        public static Area Get(string areaName)
+        public AreaRegistry()
         {
-            if (_areaFactories.TryGetValue(areaName, out var factory))
-                return factory();
+            _factories = DiscoverFactories();
+        }
+
+        private Dictionary<string, IAreaFactory> DiscoverFactories()
+        {
+            var factoryType = typeof(IAreaFactory);
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            var types = assemblies
+                .SelectMany(a =>
+                {
+                    try { return a.GetTypes(); } catch { return Array.Empty<Type>(); }
+                })
+                .Where(t => !t.IsAbstract && factoryType.IsAssignableFrom(t))
+                .ToList();
+
+            var dict = new Dictionary<string, IAreaFactory>();
+
+            foreach (var type in types)
+            {
+                try
+                {
+                    var instance = (IAreaFactory)Activator.CreateInstance(type)!;
+                    var area = instance.Create();
+                    dict[area.CodeName] = instance;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to load area from factory '{type.Name}': {ex.Message}");
+                }
+            }
+
+            return dict;
+        }
+
+        public Area Get(string areaName)
+        {
+            if (_factories.TryGetValue(areaName, out var factory))
+                return factory.Create();
 
             throw new ArgumentException($"Unknown area: {areaName}");
         }
 
-        public static IEnumerable<string> AllAreaNames => _areaFactories.Keys;
+        public IEnumerable<string> AllAreaNames => _factories.Keys;
     }
 }

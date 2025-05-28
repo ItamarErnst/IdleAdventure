@@ -1,19 +1,34 @@
+using System;
+using System.Collections.Generic;
 using IdleAdventure.Areas;
 
 namespace IdleAdventure.AreaFactories
 {
-    public static class AreaFactory_ForestShrine
+    public class AreaFactory_ForestShrine : IAreaFactory
     {
-        public static Area Create()
+        private readonly Random rand = Random.Shared;
+
+        public Area Create()
         {
-            var forest = new Area("ForestShrine")
+            var forest = new Area("ForestShrine", "Forest Shrine")
             {
-                EntranceMessage = "You arrive at a serene forest shrine, silent and overgrown."
+                EntranceMessage = $"{Colors.Bold}{Colors.NewArea}You arrive at a serene forest shrine, silent and overgrown.{Colors.Reset}"
             };
 
-            var rand = Random.Shared;
+            forest.AddEvents(
+                new WeightedEvent(CreatePathEvent(), 10),
+                new WeightedEvent(CreateCombatEvent(), 6),
+                new WeightedEvent(CreateMysticPond(), 2),
+                new WeightedEvent(CreateItemEvent("You find an enchanted herb glowing beneath a tree.", "Enchanted Herb"), 2),
+                new WeightedEvent(CreateRareItemEvent("You unearth a sacred gem from an old altar.", "Sacred Gem", 0.2), 1),
+                new WeightedEvent(CreateRareEvent("An ancient spirit appears and blesses you with a stat increase!", c => c.Strength += 1, 0.05), 1)
+            );
 
-            // 🔹 PATH
+            return forest;
+        }
+
+        private PathEvent CreatePathEvent()
+        {
             var path = new PathEvent(null, new[]
             {
                 "You hear birds chirping in the distance.",
@@ -23,24 +38,13 @@ namespace IdleAdventure.AreaFactories
                 "You spot ancient carvings on a stone."
             });
 
-            // 🔹 HEALING
-            var mysticPond = new AdventureEvent("You find a clear mystic pond. You feel revitalized as you drink.", c => c.HealFull());
+            path.AddNext(CreateExitEvent(), _ => rand.NextDouble() < 0.15);
+            return path;
+        }
 
-            // 🔹 TREASURE
-            var enchantedHerb = new AdventureEvent("You find an enchanted herb glowing beneath a tree.", c => c.Inventory.AddItem("Enchanted Herb"));
-            var sacredGem = new AdventureEvent("You unearth a sacred gem from an old altar.", c => c.Inventory.AddItem("Sacred Gem"))
-            {
-                Eligibility = _ => rand.NextDouble() < 0.2
-            };
-
-            // 🔹 RARE
-            var rareSpirit = new AdventureEvent("An ancient spirit appears and blesses you with a stat increase!", c => c.Strength += 1)
-            {
-                Eligibility = _ => rand.NextDouble() < 0.05
-            };
-
-            // 🔹 COMBAT
-            var combatEvent = new CombatBuilder()
+        private AdventureEvent CreateCombatEvent()
+        {
+            return new CombatBuilder()
                 .OnWin(c =>
                 {
                     c.GainXP(rand.Next(5, 10));
@@ -52,28 +56,46 @@ namespace IdleAdventure.AreaFactories
                     Eligibility = _ => rand.NextDouble() < 0.05
                 })
                 .Build();
+        }
 
-            // 🔹 EXIT
-            var exit = new ExitEventBuilder("You follow a worn path leading back to the meadows.")
+        private AdventureEvent CreateMysticPond()
+        {
+            return new AdventureEvent(
+                "You find a clear mystic pond. You feel revitalized as you drink.",
+                c => c.HealFull());
+        }
+
+        private AdventureEvent CreateItemEvent(string description, string itemName)
+        {
+            return new AdventureEvent(description, c => c.Inventory.AddItem(itemName));
+        }
+
+        private AdventureEvent CreateRareItemEvent(string description, string itemName, double chance)
+        {
+            return new AdventureEvent(description, c => c.Inventory.AddItem(itemName))
+            {
+                Eligibility = _ => rand.NextDouble() < chance
+            };
+        }
+
+        private AdventureEvent CreateRareEvent(string description, Action<Character> effect, double chance)
+        {
+            return new AdventureEvent(description, effect)
+            {
+                Eligibility = _ => rand.NextDouble() < chance
+            };
+        }
+
+        private AdventureEvent CreateExitEvent()
+        {
+            return new ExitEventBuilder("You follow a worn path leading back to the meadows.")
+                .AddExit("You find a muddy trail veering into a shadowy wetland.", "Swamp", 0.1)
+                .AddExit("A chilly breeze flows down from a nearby peak.", "SnowyMountain", 0.1)
                 .AddExit("You stumble into the Forgotten Crypt.", "ForgottenCrypt", 0.1)
                 .AddExit("You see a small village through the trees.", "Village", 0.1)
                 .AddExit("You find a hidden path to a dark cave.", "DarkCave", 0.1)
                 .MainExit("You arrive at the edge of the MeadowField.", "MeadowField")
                 .Build(rand);
-            
-            path.AddNext(exit, _ => rand.NextDouble() < 0.15);
-
-            
-            forest.AddEvents(
-                new WeightedEvent(path, 10),
-                new WeightedEvent(combatEvent, 6),
-                new WeightedEvent(mysticPond, 2),
-                new WeightedEvent(enchantedHerb, 2),
-                new WeightedEvent(sacredGem, 1),
-                new WeightedEvent(rareSpirit, 1)
-            );
-
-            return forest;
         }
     }
 }

@@ -1,17 +1,35 @@
-namespace IdleAdventure.Areas
+using System;
+using System.Collections.Generic;
+using IdleAdventure.Areas;
+
+namespace IdleAdventure.AreaFactories
 {
-    public static class AreaFactory_Village
+    public class AreaFactory_Village : IAreaFactory
     {
-        public static Area Create()
+        private readonly Random rand = Random.Shared;
+
+        public Area Create()
         {
-            var village = new Area("Village")
+            var village = new Area("Village", "Village")
             {
-                EntranceMessage = "You arrive at a lively village with bustling streets and friendly faces."
+                EntranceMessage = $"{Colors.Bold}{Colors.NewArea}You arrive at a lively village with bustling streets and friendly faces.{Colors.Reset}"
             };
 
-            var rand = Random.Shared;
+            village.AddEvents(
+                new WeightedEvent(CreatePathEvent(), 6),
+                new WeightedEvent(CreateLocalChat(), 3),
+                new WeightedEvent(CreateExitEvent(), 2),
+                new WeightedEvent(CreateInnEncounter(), 2),
+                new WeightedEvent(CreateStreetCoins(), 2),
+                new WeightedEvent(CreateRareEvent("A traveling bard performs a lively tune."), 1),
+                new WeightedEvent(CreateRareEvent("You help a child find their lost pet."), 1)
+            );
 
-            // 🔹 PATH
+            return village;
+        }
+
+        private PathEvent CreatePathEvent()
+        {
             var path = new PathEvent(null, new[]
             {
                 "You hear laughter from a nearby tavern.",
@@ -23,19 +41,19 @@ namespace IdleAdventure.Areas
                 "You walk down a cobblestone street lined with small shops."
             });
 
-            // 🔹 INN ENCOUNTER (conditional healing chain)
+            path.AddNext(CreateExitEvent(), _ => rand.NextDouble() < 0.1);
+            return path;
+        }
+
+        private AdventureEvent CreateInnEncounter()
+        {
             var innHealed = new AdventureEvent(
                 "You rest comfortably in the inn, fully restored.",
-                c => c.HealFull()
-            );
+                c => c.HealFull());
 
-            var innRefused = new AdventureEvent(
-                "The innkeeper shakes his head. 'Maybe next time, traveler.'"
-            );
+            var innRefused = new AdventureEvent("The innkeeper shakes his head. 'Maybe next time, traveler.'");
 
-            var innDecision = new AdventureEvent(
-                "The innkeeper offers you a warm bed for 5 gold."
-            )
+            var innDecision = new AdventureEvent("The innkeeper offers you a warm bed for 5 gold.")
             {
                 Eligibility = c => c.Inventory.Gold >= 5
             };
@@ -51,51 +69,43 @@ namespace IdleAdventure.Areas
                 return false;
             });
 
-            // 25% or ineligible
+            // fallback
             innDecision.AddNext(innRefused);
 
-            // 🔹 COINS ON GROUND (chance-based)
-            var streetCoins = new AdventureEvent(
+            return innDecision;
+        }
+
+        private AdventureEvent CreateStreetCoins()
+        {
+            return new AdventureEvent(
                 "You notice a few coins lying on the ground.",
-                c => c.Inventory.AddGold(1)
-            )
+                c => c.Inventory.AddGold(1))
             {
                 Eligibility = _ => rand.NextDouble() < 0.3
             };
+        }
 
-            // 🔹 FLAVOR
-            var localChat = new AdventureEvent("A villager greets you warmly and offers a tale.");
+        private AdventureEvent CreateLocalChat()
+        {
+            return new AdventureEvent("A villager greets you warmly and offers a tale.");
+        }
 
-            // 🔹 RARE EVENTS
-            var bardSong = new AdventureEvent("A traveling bard performs a lively tune.")
+        private AdventureEvent CreateRareEvent(string description)
+        {
+            return new AdventureEvent(description)
             {
                 Eligibility = _ => rand.NextDouble() < 0.1
             };
+        }
 
-            var lostPet = new AdventureEvent("You help a child find their lost pet.")
-            {
-                Eligibility = _ => rand.NextDouble() < 0.1
-            };
-
-            // 🔹 EXIT
-            var exit = new ExitEventBuilder("You find a narrow trail heading toward the meadows.")
-                .AddExit("You take a wrong turn and descend into the Forgotten Crypt...", "ForgottenCrypt", 0.03) // 3% chance
+        private AdventureEvent CreateExitEvent()
+        {
+            return new ExitEventBuilder("You find a narrow trail heading toward the meadows.")
+                .AddExit("A winding road climbs toward snow-covered cliffs.", "SnowyMountain", 0.1)
+                .AddExit("You take a wrong turn and descend into the Forgotten Crypt...", "ForgottenCrypt", 0.03)
                 .MainExit("You reach the edge of the village and see the meadow field.", "MeadowField")
                 .Build(rand);
-
-            path.AddNext(exit, c => rand.NextDouble() < 0.1);
-            
-            village.AddEvents(
-                new WeightedEvent(path, 6),
-                new WeightedEvent(localChat, 3),
-                new WeightedEvent(exit, 2),
-                new WeightedEvent(innDecision, 2),
-                new WeightedEvent(streetCoins, 2),
-                new WeightedEvent(bardSong, 1),
-                new WeightedEvent(lostPet, 1)
-            );
-
-            return village;
         }
+
     }
 }

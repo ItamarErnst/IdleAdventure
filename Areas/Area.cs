@@ -3,12 +3,14 @@ namespace IdleAdventure.Areas;
 public class Area
 {
     public string Name { get; set; }
+    public string CodeName { get; }                 // Internal Key
     public string EntranceMessage { get; set; } = "";
     private readonly List<WeightedEvent> _weightedEvents = new();
     
-    public Area(string name)
+    public Area(string codeName, string displayName)
     {
-        Name = name;
+        CodeName = codeName;
+        Name = displayName;
         _weightedEvents = new List<WeightedEvent>();
     }
 

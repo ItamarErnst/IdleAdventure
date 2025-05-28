@@ -17,10 +17,12 @@ public class AdventureManager
     public AdventureManager(Character character)
     {
         this.character = character;
-        foreach (var areaName in AreaRegistry.AllAreaNames)
-            areas[areaName] = AreaRegistry.Get(areaName);
-    }
 
+        var registry = new AreaRegistry();
+        foreach (var areaName in registry.AllAreaNames)
+            areas[areaName] = registry.Get(areaName);
+    }
+    
     public void TogglePause()
     {
         lock (pauseLock)

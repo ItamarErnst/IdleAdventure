@@ -1,66 +1,64 @@
 {
   "Character": {
-    "CurrentArea": "ForestShrine",
+    "CurrentArea": "MeadowField",
     "Level": 1,
-    "CurrentXP": 3,
+    "CurrentXP": 0,
     "XPToNextLevel": 100,
-    "Name": "Thorne",
-    "Gender": "Female",
-    "Height": 193,
-    "Weight": 81,
-    "BodyType": "Bulky",
-    "Profession": "Merchant",
+    "Name": "Elira",
+    "Gender": "Male",
+    "Height": 191,
+    "Weight": 76,
+    "BodyType": "Average",
+    "Profession": "Necromancer",
     "Likes": [
-      "weapons",
-      "adventure"
+      "strategy",
+      "books"
     ],
     "Dislikes": [
-      "bureaucracy",
-      "rules"
+      "noise",
+      "dust"
     ],
-    "CurrentHP": -2,
-    "CurrentMP": 17,
-    "MaxHP": 20,
-    "MaxMana": 17,
-    "Strength": 7,
-    "Agility": 8,
-    "Endurance": 7,
-    "Intelligence": 6,
-    "Charisma": 9,
-    "Perception": 3,
-    "Luck": 5,
-    "Evasion": 7,
+    "CurrentHP": 21,
+    "CurrentMP": 10,
+    "MaxHP": 21,
+    "MaxMana": 10,
+    "Strength": 6,
+    "Agility": 5,
+    "Endurance": 6,
+    "Intelligence": 9,
+    "Charisma": 4,
+    "Perception": 6,
+    "Luck": 3,
+    "Evasion": 4,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Elven Dagger",
-        "MinDamage": 1,
-        "MaxDamage": 2,
-        "MissChance": 0.06568739045676193,
-        "CritChance": 0.20456717053442358,
+        "Name": "Spiked Club",
+        "MinDamage": 5,
+        "MaxDamage": 9,
+        "MissChance": 0.21618990140570438,
+        "CritChance": 0.06208831368858894,
         "AttackDescriptions": [
-          "lunges swiftly",
-          "slices precisely",
-          "jabs gracefully"
+          "smashes down brutally",
+          "bashes with spikes",
+          "slams recklessly"
         ]
       },
-      "Gold": 14,
+      "Gold": 10,
       "weapons": [
         {
-          "Name": "Elven Dagger",
-          "MinDamage": 1,
-          "MaxDamage": 2,
-          "MissChance": 0.06568739045676193,
-          "CritChance": 0.20456717053442358,
+          "Name": "Spiked Club",
+          "MinDamage": 5,
+          "MaxDamage": 9,
+          "MissChance": 0.21618990140570438,
+          "CritChance": 0.06208831368858894,
           "AttackDescriptions": [
-            "lunges swiftly",
-            "slices precisely",
-            "jabs gracefully"
+            "smashes down brutally",
+            "bashes with spikes",
+            "slams recklessly"
           ]
         }
       ],
-      "items": {
-        "Enchanted Herb": 1
-      }
+      "items": {}
     }
   }
 }
