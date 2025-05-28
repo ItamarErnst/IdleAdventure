@@ -74,12 +74,12 @@ namespace IdleAdventure.Areas
 
             meadow.AddEvents(
                 new WeightedEvent(path, 5),
-                new WeightedEvent(exit, 2)
-                // new WeightedEvent(combatEvent, 3),
-                // new WeightedEvent(rainbowHeal, 1),
-                // new WeightedEvent(luckyFind, 1),
-                // new WeightedEvent(oldCabin, 1),
-                // new WeightedEvent(deerEncounter, 1)
+                new WeightedEvent(exit, 2),
+                new WeightedEvent(combatEvent, 3),
+                new WeightedEvent(rainbowHeal, 1),
+                new WeightedEvent(luckyFind, 1),
+                new WeightedEvent(oldCabin, 1),
+                new WeightedEvent(deerEncounter, 1)
             );
             
             return meadow;

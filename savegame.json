@@ -2,7 +2,7 @@
   "Character": {
     "CurrentArea": "DarkCave",
     "Level": 1,
-    "CurrentXP": 63,
+    "CurrentXP": 54,
     "XPToNextLevel": 100,
     "Name": "Dain",
     "Gender": "Male",
@@ -18,7 +18,7 @@
       "dust",
       "bureaucracy"
     ],
-    "CurrentHP": 19,
+    "CurrentHP": -1,
     "CurrentMP": 18,
     "MaxHP": 27,
     "MaxMana": 18,
@@ -43,7 +43,7 @@
           "reloads and fires again"
         ]
       },
-      "Gold": 36,
+      "Gold": 56,
       "weapons": [
         {
           "Name": "Crossbow",
