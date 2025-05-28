@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Text;
 
 namespace IdleAdventure;
@@ -54,7 +55,7 @@ public class Character
     public void GainXP(int amount)
     {
         CurrentXP += amount * 3;
-        ColorText.WriteLine($"Gained {amount} XP!", ConsoleColor.Yellow);
+        ColorText.WriteLine($"{Colors.Bold}Gained {amount} XP!", Colors.Player);
 
         while (CurrentXP >= XPToNextLevel)
         {
@@ -68,7 +69,7 @@ public class Character
     private void LevelUp()
     {
         Level++;
-        ColorText.WriteLine($"Level Up! You are now level {Level}.", ConsoleColor.Cyan);
+        ColorText.WriteLine($"Level Up! You are now level {Level}.", Colors.Player);
 
         int statPoints = 3;
         DistributeStatPoints(statPoints);
@@ -94,7 +95,7 @@ public class Character
             stats[index]();
         }
 
-        ColorText.WriteLine($"+{points} stat points distributed!", ConsoleColor.Magenta);
+        ColorText.WriteLine($"+{points} stat points distributed!", Colors.Stats);
     }
     
     private void DrawXPBar(int current, int max, int barWidth = 40)
@@ -126,7 +127,7 @@ public class Character
             }
         }
 
-        ColorText.WriteLine($"[{bar}]", ConsoleColor.DarkGray);
+        ColorText.WriteLine($"[{bar}]", Colors.Player);
     }
 
     
@@ -140,8 +141,8 @@ public class Character
 
         if (hpHealed != 0 || manaHealed != 0)
         {
-            ColorText.WriteLine($"Fully healed: +{hpHealed} HP, +{manaHealed} Mana", ConsoleColor.Green);
-            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP} | Mana: {MaxMana}/{CurrentMP}", ConsoleColor.DarkGray);
+            ColorText.WriteLine($"Fully healed: +{hpHealed} HP, +{manaHealed} Mana", Colors.Player);
+            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP} | Mana: {MaxMana}/{CurrentMP}", Colors.Stats);
         }
     }
 
@@ -153,8 +154,8 @@ public class Character
 
         if (healed != 0)
         {
-            ColorText.WriteLine($"Healed HP: +{healed}", ConsoleColor.Green);
-            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP}", ConsoleColor.DarkGray);
+            ColorText.WriteLine($"Healed HP: +{healed}", Colors.HP);
+            ColorText.WriteLine($"Current HP: {CurrentHP}/{MaxHP}", Colors.Stats);
         }
     }
 
@@ -166,8 +167,8 @@ public class Character
 
         if (healed != 0)
         {
-            ColorText.WriteLine($"Restored Mana: +{healed}", ConsoleColor.Blue);
-            ColorText.WriteLine($"Current Mana: {MaxMana}/{CurrentMP}", ConsoleColor.DarkGray);
+            ColorText.WriteLine($"Restored Mana: +{healed}", Colors.Magic);
+            ColorText.WriteLine($"Current Mana: {MaxMana}/{CurrentMP}", Colors.Stats);
         }
     }
 }

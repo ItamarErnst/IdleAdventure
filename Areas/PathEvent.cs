@@ -24,7 +24,7 @@ public class PathEvent : AdventureEvent
     public override void Execute(Character character)
     {
         var fluff = fluffLines[Rand.Next(fluffLines.Length)];
-        ColorText.WriteLine($"{fluff}", ConsoleColor.White);
+        ColorText.WriteLine($"{fluff}", Colors.Description);
         Outcome?.Invoke(character);
     }
 }

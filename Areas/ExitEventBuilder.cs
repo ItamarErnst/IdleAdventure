@@ -37,7 +37,7 @@ public class ExitEventBuilder
             {
                 if (rand.NextDouble() < chance)
                 {
-                    ColorText.WriteLine(desc, ConsoleColor.White);
+                    ColorText.WriteLine(desc, Colors.Description);
                     available_areas.Add(area);
                 }
             }
@@ -52,12 +52,12 @@ public class ExitEventBuilder
             if (_mainExit != null)
             {
                 var (desc, area) = _mainExit.Value;
-                ColorText.WriteLine(desc, ConsoleColor.White);
+                ColorText.WriteLine(desc, Colors.Description);
                 c.CurrentArea = area;
             }
             else
             {
-                ColorText.WriteLine("-- You decided to ignore it.", ConsoleColor.DarkGray);
+                ColorText.WriteLine("-- You decided to ignore it.", Colors.Ignore);
             }
         });
     }

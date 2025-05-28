@@ -43,7 +43,7 @@ public class CombatBuilder
 
                 var onWin = new AdventureEvent(enemy.DeathText,
                     _onWinAction ?? (_ => { }),
-                    descriptionColor: ConsoleColor.DarkRed
+                    descriptionColor: Colors.HP
                 );
 
                 if (_extraWinEvents.Count != 0)
@@ -56,7 +56,7 @@ public class CombatBuilder
 
                 var onLose = new AdventureEvent(enemy.WinText,
                     _onLoseAction ?? (_ => { }),
-                    descriptionColor: ConsoleColor.Green
+                    descriptionColor: Colors.Item
                 );
 
                 CombatSystem.Run(character, () => enemy, onWin, onLose);

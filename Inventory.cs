@@ -26,11 +26,11 @@ public class Inventory
         if (EquippedWeapon.Name == "Unarmed")
         {
             EquipWeapon(weapon);
-            ColorText.WriteLine($"You equipped {weapon.Name}.", ConsoleColor.Green);
+            ColorText.WriteLine($"You equipped {Colors.Magic}{weapon.Name}.", Colors.Item);
         }
         else
         {
-            ColorText.WriteLine($"You found a new weapon: {weapon.Name}.", ConsoleColor.Cyan);
+            ColorText.WriteLine($"You found a new weapon: {Colors.Magic}{weapon.Name}.", Colors.Item);
         }
     }
 
@@ -49,7 +49,7 @@ public class Inventory
     public void AddGold(int amount)
     {
         Gold += amount;
-        ColorText.WriteLine($"💰 +{amount} gold. Total: {Gold}", ConsoleColor.Yellow);
+        ColorText.WriteLine($"💰 +{amount} gold. Total: {Gold}", Colors.Gold);
     }
 
     public List<string> Show()
@@ -76,5 +76,15 @@ public class Inventory
     public void EquipWeapon(Weapon weapon)
     {
         EquippedWeapon = weapon;
+    }
+
+    public bool HasItem(string item)
+    {
+        if (items.TryGetValue(item, out int count))
+        {
+            return count > 0;
+        }
+       
+        return false;
     }
 }

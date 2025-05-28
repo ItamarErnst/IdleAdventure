@@ -27,9 +27,9 @@ namespace IdleAdventure
         }
 
         /// <summary>Draws a colored horizontal line.</summary>
-        public static void DrawFancySeparator(string color = ColorText.Blue)
+        public static void DrawFancySeparator(string color = Colors.System)
         {
-            string bar = $"{color}{new string('═', Console.WindowWidth)}{ColorText.Reset}";
+            string bar = $"{color}{new string('═', Console.WindowWidth)}{Colors.Reset}";
             Console.WriteLine(bar);
         }
 
@@ -43,8 +43,8 @@ namespace IdleAdventure
 
             if (borderColor != null)
             {
-                top = $"{borderColor}{top}{ColorText.Reset}";
-                bottom = $"{borderColor}{bottom}{ColorText.Reset}";
+                top = $"{borderColor}{top}{Colors.Reset}";
+                bottom = $"{borderColor}{bottom}{Colors.Reset}";
             }
 
             Console.WriteLine(top);

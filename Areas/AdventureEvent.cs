@@ -2,7 +2,7 @@ namespace IdleAdventure;
 public class AdventureEvent
 {
     public string Description { get; set; }
-    public ConsoleColor DescriptionColor { get; }
+    public string DescriptionColor { get; }
     public Action<Character>? Outcome { get; set; }
     public string? AreaTransition { get; set; }
 
@@ -13,7 +13,7 @@ public class AdventureEvent
         string description,
         Action<Character>? outcome = null,
         string? areaTransition = null,
-        ConsoleColor descriptionColor = ConsoleColor.White)
+        string descriptionColor = Colors.Description)
     {
         Description = description;
         Outcome = outcome;

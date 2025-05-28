@@ -14,9 +14,9 @@ public static class CombatSystem
         int turn = 1;
 
         Thread.Sleep(GlobalTimer.EventTimer);
-        ColorText.WriteLine(enemy.EncounterText, ConsoleColor.White);
+        ColorText.WriteLine(enemy.EncounterText, Colors.Description);
         Thread.Sleep(GlobalTimer.EventTimer);
-        ColorText.WriteLine($"Combat starts with {enemy.Name}!", ConsoleColor.Red);
+        ColorText.WriteLine($"Combat starts with {enemy.Name}!",Colors.Description);
 
         while (enemy.HP > 0 && character.CurrentHP > 0)
         {
@@ -27,19 +27,19 @@ public static class CombatSystem
 
             if (rand.NextDouble() < character.GetEquippedWeapon().MissChance || rand.Next(100) < enemy.Evasion)
             {
-                ColorText.WriteLine("You miss your attack!", ConsoleColor.Gray);
+                ColorText.WriteLine("You miss your attack!", Colors.Ignore);
             }
             else
             {
                 string attackDesc = character.GetEquippedWeapon().GetRandomAttackDescription(rand);
-                ConsoleColor textColor = isCrit ? ConsoleColor.Green : ConsoleColor.Yellow;
+                string textColor = isCrit ? Colors.Critical : Colors.Player;
 
                 if (isCrit)
-                    ColorText.Write("Critical! ", ConsoleColor.Green);
+                    ColorText.Write($"{Colors.Italic}Critical! ", Colors.Critical);
 
                 ColorText.Write($"You {attackDesc} with {character.GetEquippedWeapon().Name} ", textColor);
-                ColorText.Write($"{playerDamage}", ConsoleColor.Red);
-                ColorText.WriteLine($" dmg. 🐾 {enemy.Name} HP: {Math.Max(enemy.HP - playerDamage, 0)}", ConsoleColor.DarkRed);
+                ColorText.Write($"{playerDamage}", Colors.Damage);
+                ColorText.WriteLine($" dmg. 🐾 {enemy.Name} HP: {Math.Max(enemy.HP - playerDamage, 0)}", Colors.HP);
 
                 enemy.HP -= playerDamage;
             }
@@ -52,16 +52,16 @@ public static class CombatSystem
 
             if (rand.Next(100) < character.Evasion)
             {
-                ColorText.WriteLine($"You dodge the {enemy.Name}'s attack!", ConsoleColor.Cyan);
+                ColorText.WriteLine($"You dodge the {enemy.Name}'s attack!", Colors.Player);
             }
             else
             {
                 string enemyAttack = enemy.GetRandomAttackDescription(rand);
                 character.CurrentHP -= enemyDamage;
 
-                ColorText.Write($"{enemy.Name} {enemyAttack} ", ConsoleColor.White);
-                ColorText.Write($"{enemyDamage}", ConsoleColor.Red);
-                ColorText.WriteLine($" dmg. ❤️ Your HP: {Math.Max(character.CurrentHP, 0)}", ConsoleColor.DarkRed);
+                ColorText.Write($"{enemy.Name} {enemyAttack} ", Colors.Description);
+                ColorText.Write($"{enemyDamage}", Colors.Damage);
+                ColorText.WriteLine($" dmg. ❤️ Your HP: {Math.Max(character.CurrentHP, 0)}", Colors.HP);
             }
 
             turn++;

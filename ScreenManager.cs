@@ -18,15 +18,16 @@ class ScreenManager
 
         List<string> infoLines = new List<string>
         {
-            $"{ColorText.Green}Strength     {character.Strength,2}{ColorText.White}  | Name: {character.Name}",
-            $"{ColorText.Green}Agility      {character.Agility,2}{ColorText.White}  | Gender: {character.Gender}",
-            $"{ColorText.Green}Endurance    {character.Endurance,2}{ColorText.White}  | Height: {character.Height} cm",
-            $"{ColorText.Green}Intelligence {character.Intelligence,2}{ColorText.White}  | Weight: {character.Weight} kg",
-            $"{ColorText.Green}Charisma     {character.Charisma,2}{ColorText.White}  | Body: {character.BodyType}",
-            $"{ColorText.Green}Perception   {character.Perception,2}{ColorText.White}  | Profession: {character.Profession}",
-            $"{ColorText.Green}Luck         {character.Luck,2}{ColorText.White}  | Likes: {string.Join(", ", character.Likes)}",
-            $"{ColorText.Green}Evasion      {character.Evasion,2}{ColorText.White}  | Dislikes: {string.Join(", ", character.Dislikes)}",
-            $"{ColorText.Blue}HP           {character.CurrentHP,2}/{character.MaxHP,-3}{ColorText.White} | Mana: {character.MaxMana} MP",
+            $"{Colors.Stats}Strength     {character.Strength,2}{Colors.Description}  | Name: {character.Name}",
+            $"{Colors.Stats}Agility      {character.Agility,2}{Colors.Description}  | Gender: {character.Gender}",
+            $"{Colors.Stats}Endurance    {character.Endurance,2}{Colors.Description}  | Height: {character.Height} cm",
+            $"{Colors.Stats}Intelligence {character.Intelligence,2}{Colors.Description}  | Weight: {character.Weight} kg",
+            $"{Colors.Stats}Charisma     {character.Charisma,2}{Colors.Description}  | Body: {character.BodyType}",
+            $"{Colors.Stats}Perception   {character.Perception,2}{Colors.Description}  | Profession: {character.Profession}",
+            $"{Colors.Stats}Luck         {character.Luck,2}{Colors.Description}  | Likes: {string.Join(", ", character.Likes)}",
+            $"{Colors.Stats}Evasion      {character.Evasion,2}{Colors.Description}  | Dislikes: {string.Join(", ", character.Dislikes)}",
+            $"{Colors.HP}HP           {character.CurrentHP,2}/{character.MaxHP,-3}{Colors.Description}",
+            $"{Colors.Magic}Mana           {character.CurrentMP,2}/{character.MaxMana,-3}{Colors.Description}",
             ""
         };
 

@@ -37,17 +37,6 @@ public class AdventureManager
         }
     }
 
-    private void WaitIfPaused()
-    {
-        lock (pauseLock)
-        {
-            while (isPaused)
-            {
-                Monitor.Wait(pauseLock);
-            }
-        }
-    }
-
     public async Task RunAsync()
     {
         AdventureEvent? currentEvent = null;
@@ -62,13 +51,13 @@ public class AdventureManager
 
             if (!areas.TryGetValue(currentAreaName, out var area))
             {
-                ColorText.WriteLine($"Unknown area: {currentAreaName}", ConsoleColor.Red);
+                ColorText.WriteLine($"Unknown area: {currentAreaName}", Colors.Damage);
                 break;
             }
 
             if (!hasShownEntranceMessage && !string.IsNullOrEmpty(area.EntranceMessage))
             {
-                ColorText.WriteLine(area.EntranceMessage, ConsoleColor.Cyan);
+                ColorText.WriteLine(area.EntranceMessage, Colors.NewArea);
                 hasShownEntranceMessage = true;
                 await Task.Delay(GlobalTimer.NewAreaTimer);
             }

@@ -1,64 +1,66 @@
 {
   "Character": {
-    "CurrentArea": "DarkCave",
+    "CurrentArea": "ForestShrine",
     "Level": 1,
-    "CurrentXP": 9,
+    "CurrentXP": 3,
     "XPToNextLevel": 100,
-    "Name": "Aeris",
-    "Gender": "Fluid",
-    "Height": 156,
-    "Weight": 113,
-    "BodyType": "Athletic",
-    "Profession": "Wizard",
+    "Name": "Thorne",
+    "Gender": "Female",
+    "Height": 193,
+    "Weight": 81,
+    "BodyType": "Bulky",
+    "Profession": "Merchant",
     "Likes": [
-      "cats",
-      "fame"
+      "weapons",
+      "adventure"
     ],
     "Dislikes": [
-      "heat",
-      "waiting"
+      "bureaucracy",
+      "rules"
     ],
-    "CurrentHP": 21,
-    "CurrentMP": 16,
-    "MaxHP": 23,
-    "MaxMana": 16,
-    "Strength": 3,
-    "Agility": 6,
-    "Endurance": 9,
+    "CurrentHP": -2,
+    "CurrentMP": 17,
+    "MaxHP": 20,
+    "MaxMana": 17,
+    "Strength": 7,
+    "Agility": 8,
+    "Endurance": 7,
     "Intelligence": 6,
-    "Charisma": 4,
-    "Perception": 10,
-    "Luck": 9,
-    "Evasion": 9,
+    "Charisma": 9,
+    "Perception": 3,
+    "Luck": 5,
+    "Evasion": 7,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Unarmed",
-        "MinDamage": 2,
-        "MaxDamage": 3,
-        "MissChance": 0.2326527308834177,
-        "CritChance": 0.08590827878927257,
+        "Name": "Elven Dagger",
+        "MinDamage": 1,
+        "MaxDamage": 2,
+        "MissChance": 0.06568739045676193,
+        "CritChance": 0.20456717053442358,
         "AttackDescriptions": [
-          "throws a desperate punch",
-          "kicks awkwardly",
-          "flails wildly"
+          "lunges swiftly",
+          "slices precisely",
+          "jabs gracefully"
         ]
       },
-      "Gold": 13,
+      "Gold": 14,
       "weapons": [
         {
-          "Name": "Unarmed",
-          "MinDamage": 2,
-          "MaxDamage": 3,
-          "MissChance": 0.2326527308834177,
-          "CritChance": 0.08590827878927257,
+          "Name": "Elven Dagger",
+          "MinDamage": 1,
+          "MaxDamage": 2,
+          "MissChance": 0.06568739045676193,
+          "CritChance": 0.20456717053442358,
           "AttackDescriptions": [
-            "throws a desperate punch",
-            "kicks awkwardly",
-            "flails wildly"
+            "lunges swiftly",
+            "slices precisely",
+            "jabs gracefully"
           ]
         }
       ],
-      "items": {}
+      "items": {
+        "Enchanted Herb": 1
+      }
     }
   }
 }
