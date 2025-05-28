@@ -14,6 +14,7 @@ class Program
     {
         bool isPaused = false;
         Character? character = null;
+        var screenManager = new ScreenManager();
 
         while (true)
         {
@@ -23,7 +24,7 @@ class Program
             if (character != null && character.CurrentHP <= 0)
             {
                 character = StartGame(skipPrompt: true);
-                HandleIdleRecovery(character);
+                HandleIdleRecovery(character,screenManager);
 
                 if (character.CurrentHP > 0)
                 {
@@ -34,7 +35,7 @@ class Program
             else
             {
                 character = StartGame(); // with menu
-                HandleIdleRecovery(character);
+                HandleIdleRecovery(character,screenManager);
 
                 if (character.CurrentHP <= 0)
                 {
@@ -45,7 +46,6 @@ class Program
             }
 
             SaveData.SaveGame(character);
-            var screenManager = new ScreenManager();
 
             if (!justRecovered)
             {
@@ -138,7 +138,7 @@ class Program
         return CreateNewCharacter();
     }
 
-    private static void HandleIdleRecovery(Character character)
+    private static void HandleIdleRecovery(Character character, ScreenManager screenManager)
     {
         if (!character.LastDeathTime.HasValue) return;
 
@@ -150,6 +150,7 @@ class Program
         }
         else if (character.CurrentHP <= 0)
         {
+            screenManager.ShowCharacterInfo(character);
             ShowRecoveryCountdown(character);
         }
     }

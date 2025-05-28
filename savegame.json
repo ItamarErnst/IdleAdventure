@@ -1,61 +1,61 @@
 {
   "Character": {
     "CurrentArea": "Shore",
-    "LastDeathTime": "2025-05-28T19:42:28.5804438+02:00",
+    "LastDeathTime": "2025-05-28T21:00:42.5247253+02:00",
     "Level": 1,
-    "CurrentXP": 0,
+    "CurrentXP": 3,
     "XPToNextLevel": 100,
-    "Name": "Aeris",
-    "Gender": "Other",
-    "Height": 155,
-    "Weight": 102,
-    "BodyType": "Lithe",
-    "Profession": "Wizard",
+    "Name": "Silas",
+    "Gender": "Fluid",
+    "Height": 194,
+    "Weight": 81,
+    "BodyType": "Bulky",
+    "Profession": "Warrior",
     "Likes": [
-      "gold",
-      "cats"
+      "weapons",
+      "books"
     ],
     "Dislikes": [
-      "noise",
-      "cold"
+      "bureaucracy",
+      "fish"
     ],
-    "CurrentHP": 28,
-    "CurrentMP": 17,
-    "MaxHP": 28,
-    "MaxMana": 17,
-    "Strength": 10,
-    "Agility": 3,
+    "CurrentHP": 22,
+    "CurrentMP": 2,
+    "MaxHP": 24,
+    "MaxMana": 2,
+    "Strength": 3,
+    "Agility": 8,
     "Endurance": 6,
-    "Intelligence": 10,
-    "Charisma": 9,
-    "Perception": 3,
-    "Luck": 3,
-    "Evasion": 7,
+    "Intelligence": 5,
+    "Charisma": 4,
+    "Perception": 9,
+    "Luck": 9,
+    "Evasion": 10,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Twin Blades",
-        "MinDamage": 3,
-        "MaxDamage": 4,
-        "MissChance": 0.06814286973066601,
-        "CritChance": 0.30612620733146606,
+        "Name": "Fire Wand",
+        "MinDamage": 4,
+        "MaxDamage": 7,
+        "MissChance": 0.15115603376191056,
+        "CritChance": 0.2631092636831523,
         "AttackDescriptions": [
-          "slashes in a quick combo",
-          "cuts with twin arcs",
-          "whirls around furiously"
+          "launches a fireball",
+          "casts a burning spark",
+          "unleashes searing heat"
         ]
       },
-      "Gold": 10,
+      "Gold": 13,
       "weapons": [
         {
-          "Name": "Twin Blades",
-          "MinDamage": 3,
-          "MaxDamage": 4,
-          "MissChance": 0.06814286973066601,
-          "CritChance": 0.30612620733146606,
+          "Name": "Fire Wand",
+          "MinDamage": 4,
+          "MaxDamage": 7,
+          "MissChance": 0.15115603376191056,
+          "CritChance": 0.2631092636831523,
           "AttackDescriptions": [
-            "slashes in a quick combo",
-            "cuts with twin arcs",
-            "whirls around furiously"
+            "launches a fireball",
+            "casts a burning spark",
+            "unleashes searing heat"
           ]
         }
       ],
