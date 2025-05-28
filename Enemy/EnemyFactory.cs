@@ -89,7 +89,6 @@ public static class EnemyFactory
         // New random stats
         int dodgeChance = rand.Next(3, 8);          // 3-7% dodge chance
         int physicalDefense = rand.Next(5, 11);     // 5-10 physical defense
-        float baseLootChance = 0.25f;               // Using NORMAL_MOB chance as default
         int criticalHitChance = rand.Next(3, 6);    // 3-5% crit chance
 
         return new Enemy(
