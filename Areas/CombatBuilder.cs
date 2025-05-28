@@ -36,29 +36,29 @@ public class CombatBuilder
 
     public AdventureEvent Build()
     {
-        var enemy = _enemyFactory();
-
-        var onWin = new AdventureEvent(enemy.DeathText,
-            _onWinAction ?? (_ => { }),
-            descriptionColor: ConsoleColor.DarkRed
-            );
-        
-        if (_extraWinEvents.Count != 0)
-        {
-            foreach (var evt in _extraWinEvents)
-            {
-                onWin.AddNext(evt);
-            }
-        }
-
-        var onLose = new AdventureEvent(enemy.WinText,
-            _onLoseAction ?? (_ => { }),
-            descriptionColor: ConsoleColor.Green
-            );
-
         return EventBuilder
             .FromAction(character =>
             {
+                var enemy = _enemyFactory();
+
+                var onWin = new AdventureEvent(enemy.DeathText,
+                    _onWinAction ?? (_ => { }),
+                    descriptionColor: ConsoleColor.DarkRed
+                );
+
+                if (_extraWinEvents.Count != 0)
+                {
+                    foreach (var evt in _extraWinEvents)
+                    {
+                        onWin.AddNext(evt);
+                    }
+                }
+
+                var onLose = new AdventureEvent(enemy.WinText,
+                    _onLoseAction ?? (_ => { }),
+                    descriptionColor: ConsoleColor.Green
+                );
+
                 CombatSystem.Run(character, () => enemy, onWin, onLose);
             })
             .Build();

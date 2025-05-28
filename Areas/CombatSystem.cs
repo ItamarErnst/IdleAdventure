@@ -13,8 +13,10 @@ public static class CombatSystem
 
         int turn = 1;
 
-        Thread.Sleep(GlobalTimer.TurnTimer);
-        ColorText.WriteLine(enemy.EncounterText, ConsoleColor.Red);
+        Thread.Sleep(GlobalTimer.EventTimer);
+        ColorText.WriteLine(enemy.EncounterText, ConsoleColor.White);
+        Thread.Sleep(GlobalTimer.EventTimer);
+        ColorText.WriteLine($"Combat starts with {enemy.Name}!", ConsoleColor.Red);
 
         while (enemy.HP > 0 && character.CurrentHP > 0)
         {

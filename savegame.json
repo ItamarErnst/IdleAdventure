@@ -1,60 +1,60 @@
 {
   "Character": {
-    "CurrentArea": "ForgottenCrypt",
+    "CurrentArea": "DarkCave",
     "Level": 1,
-    "CurrentXP": 0,
+    "CurrentXP": 63,
     "XPToNextLevel": 100,
-    "Name": "Elira",
-    "Gender": "Female",
-    "Height": 199,
-    "Weight": 50,
-    "BodyType": "Slim",
+    "Name": "Dain",
+    "Gender": "Male",
+    "Height": 187,
+    "Weight": 115,
+    "BodyType": "Average",
     "Profession": "Thief",
     "Likes": [
-      "weapons",
-      "fame"
+      "cake",
+      "gold"
     ],
     "Dislikes": [
-      "waiting",
+      "dust",
       "bureaucracy"
     ],
-    "CurrentHP": 18,
-    "CurrentMP": 9,
-    "MaxHP": 18,
-    "MaxMana": 9,
-    "Strength": 3,
-    "Agility": 9,
-    "Endurance": 6,
-    "Intelligence": 6,
+    "CurrentHP": 19,
+    "CurrentMP": 18,
+    "MaxHP": 27,
+    "MaxMana": 18,
+    "Strength": 9,
+    "Agility": 8,
+    "Endurance": 5,
+    "Intelligence": 5,
     "Charisma": 4,
-    "Perception": 10,
-    "Luck": 4,
-    "Evasion": 9,
+    "Perception": 8,
+    "Luck": 10,
+    "Evasion": 6,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Rusty Sword",
+        "Name": "Crossbow",
         "MinDamage": 4,
-        "MaxDamage": 8,
-        "MissChance": 0.08169290623890377,
-        "CritChance": 0.1080742274685903,
+        "MaxDamage": 7,
+        "MissChance": 0.05350950514222472,
+        "CritChance": 0.26136446788037593,
         "AttackDescriptions": [
-          "slashes clumsily",
-          "swings wildly",
-          "stabs forward"
+          "fires a bolt with a snap",
+          "lets loose a precise shot",
+          "reloads and fires again"
         ]
       },
-      "Gold": 10,
+      "Gold": 36,
       "weapons": [
         {
-          "Name": "Rusty Sword",
+          "Name": "Crossbow",
           "MinDamage": 4,
-          "MaxDamage": 8,
-          "MissChance": 0.08169290623890377,
-          "CritChance": 0.1080742274685903,
+          "MaxDamage": 7,
+          "MissChance": 0.05350950514222472,
+          "CritChance": 0.26136446788037593,
           "AttackDescriptions": [
-            "slashes clumsily",
-            "swings wildly",
-            "stabs forward"
+            "fires a bolt with a snap",
+            "lets loose a precise shot",
+            "reloads and fires again"
           ]
         }
       ],
