@@ -9,8 +9,7 @@ public class AdventureManager
 
     private string currentAreaName = "MeadowField";
     private bool hasShownEntranceMessage = false;
-
-    private AdventureEvent? currentEvent = null;
+    public static event Action? OnPlayerDeath;
 
     private volatile bool isPaused = false;
     private readonly object pauseLock = new();
@@ -33,7 +32,7 @@ public class AdventureManager
             }
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(isPaused ? "\n⏸️  Game Paused" : "\n▶️  Game Resumed");
+            Console.WriteLine(isPaused ? "\n⏸️  Game Paused" : "\n▶️  Game Resumed", ConsoleColor.Yellow);
             Console.ResetColor();
         }
     }
@@ -51,9 +50,15 @@ public class AdventureManager
 
     public async Task RunAsync()
     {
-        while (true)
+        AdventureEvent? currentEvent = null;
+
+        while (character.CurrentHP > 0)
         {
-            WaitIfPaused(); // 🔹 Pause support
+            // ✅ Pause support
+            while (isPaused)
+            {
+                await Task.Delay(200);
+            }
 
             if (!areas.TryGetValue(currentAreaName, out var area))
             {
@@ -92,5 +97,8 @@ public class AdventureManager
             SaveData.SaveGame(character);
             await Task.Delay(GlobalTimer.EventTimer);
         }
+
+        // This signals RunAsync finished (e.g. HP <= 0)
+        OnPlayerDeath?.Invoke();
     }
 }

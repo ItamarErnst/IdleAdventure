@@ -2,59 +2,59 @@
   "Character": {
     "CurrentArea": "DarkCave",
     "Level": 1,
-    "CurrentXP": 54,
+    "CurrentXP": 9,
     "XPToNextLevel": 100,
-    "Name": "Dain",
-    "Gender": "Male",
-    "Height": 187,
-    "Weight": 115,
-    "BodyType": "Average",
-    "Profession": "Thief",
+    "Name": "Aeris",
+    "Gender": "Fluid",
+    "Height": 156,
+    "Weight": 113,
+    "BodyType": "Athletic",
+    "Profession": "Wizard",
     "Likes": [
-      "cake",
-      "gold"
+      "cats",
+      "fame"
     ],
     "Dislikes": [
-      "dust",
-      "bureaucracy"
+      "heat",
+      "waiting"
     ],
-    "CurrentHP": -1,
-    "CurrentMP": 18,
-    "MaxHP": 27,
-    "MaxMana": 18,
-    "Strength": 9,
-    "Agility": 8,
-    "Endurance": 5,
-    "Intelligence": 5,
+    "CurrentHP": 21,
+    "CurrentMP": 16,
+    "MaxHP": 23,
+    "MaxMana": 16,
+    "Strength": 3,
+    "Agility": 6,
+    "Endurance": 9,
+    "Intelligence": 6,
     "Charisma": 4,
-    "Perception": 8,
-    "Luck": 10,
-    "Evasion": 6,
+    "Perception": 10,
+    "Luck": 9,
+    "Evasion": 9,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Crossbow",
-        "MinDamage": 4,
-        "MaxDamage": 7,
-        "MissChance": 0.05350950514222472,
-        "CritChance": 0.26136446788037593,
+        "Name": "Unarmed",
+        "MinDamage": 2,
+        "MaxDamage": 3,
+        "MissChance": 0.2326527308834177,
+        "CritChance": 0.08590827878927257,
         "AttackDescriptions": [
-          "fires a bolt with a snap",
-          "lets loose a precise shot",
-          "reloads and fires again"
+          "throws a desperate punch",
+          "kicks awkwardly",
+          "flails wildly"
         ]
       },
-      "Gold": 56,
+      "Gold": 13,
       "weapons": [
         {
-          "Name": "Crossbow",
-          "MinDamage": 4,
-          "MaxDamage": 7,
-          "MissChance": 0.05350950514222472,
-          "CritChance": 0.26136446788037593,
+          "Name": "Unarmed",
+          "MinDamage": 2,
+          "MaxDamage": 3,
+          "MissChance": 0.2326527308834177,
+          "CritChance": 0.08590827878927257,
           "AttackDescriptions": [
-            "fires a bolt with a snap",
-            "lets loose a precise shot",
-            "reloads and fires again"
+            "throws a desperate punch",
+            "kicks awkwardly",
+            "flails wildly"
           ]
         }
       ],

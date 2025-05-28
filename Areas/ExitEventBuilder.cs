@@ -29,7 +29,8 @@ public class ExitEventBuilder
         return new AdventureEvent(_discoveryText, c =>
         {
             Thread.Sleep(GlobalTimer.EventTimer);
-
+            List<string> available_areas = new();
+            
             // Attempt all exits in random order
             var shuffled = _exits.OrderBy(_ => rand.Next()).ToList();
             foreach (var (desc, area, chance) in shuffled)
@@ -37,9 +38,14 @@ public class ExitEventBuilder
                 if (rand.NextDouble() < chance)
                 {
                     ColorText.WriteLine(desc, ConsoleColor.White);
-                    c.CurrentArea = area;
-                    return;
+                    available_areas.Add(area);
                 }
+            }
+
+            if (available_areas.Count != 0)
+            {
+                c.CurrentArea = available_areas[rand.Next(available_areas.Count)];
+                return;
             }
 
             // Fallback: main or default

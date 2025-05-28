@@ -8,11 +8,66 @@ class Program
 {
     public static async Task Main(string[] args)
     {
-        Character character;
+        bool isPaused = false;
 
+        while (true)
+        {
+            Character character = StartGame();
+
+            SaveData.SaveGame(character);
+            var screenManager = new ScreenManager();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("=== Welcome to the Idle Adventure! ===");
+            Console.ResetColor();
+            screenManager.ShowCharacterInfo(character);
+
+            var adventureManager = new AdventureManager(character);
+            var adventureTask = adventureManager.RunAsync();
+
+            bool isDead = false;
+            AdventureManager.OnPlayerDeath += () => isDead = true;
+
+            _ = Task.Run(() =>
+            {
+                while (!isDead)
+                {
+                    if (Console.KeyAvailable)
+                    {
+                        var key = Console.ReadKey(true).Key;
+                        if (key == ConsoleKey.P)
+                        {
+                            isPaused = !isPaused;
+                            adventureManager.TogglePause();
+                            if (isPaused)
+                            {
+                                screenManager.ShowCharacterInfo(character);
+                            }
+                        }
+                    }
+
+                    Thread.Sleep(100);
+                }
+            });
+
+            await adventureTask;
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("\n☠ You have died! Press any key to start a new adventure...");
+            Console.ResetColor();
+            Console.ReadKey(true);
+            Console.Clear();
+        }
+    }
+
+    private static Character StartGame()
+    {
+        // Console.Clear();
         Console.WriteLine("Welcome to Idle Adventure!");
         Console.WriteLine("[L]oad game or [N]ew game?");
         ConsoleKey choice = Console.ReadKey(true).Key;
+
+        Character character;
 
         if (choice == ConsoleKey.L && File.Exists(SaveData.SaveFilePath))
         {
@@ -25,47 +80,23 @@ class Program
             else
             {
                 Console.WriteLine("Failed to load game. Starting new...");
-                character = CharacterGenerator.Generate();
-                Weapon weapon = WeaponFactory.CreateRandom();
-                character.Inventory.SetStartingInventory(weapon, 10);
+                character = CreateNewCharacter();
             }
         }
         else
         {
-            character = CharacterGenerator.Generate();
-            Weapon weapon = WeaponFactory.CreateRandom();
-            character.Inventory.SetStartingInventory(weapon, 10);
+            character = CreateNewCharacter();
         }
 
-        SaveData.SaveGame(character);
-        var screenManager = new ScreenManager();
-
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("=== Welcome to the Idle Adventure! ===");
-        Console.ResetColor();
-        screenManager.ShowCharacterInfo(character);
-
-        // ✅ In Main()
-        var adventureManager = new AdventureManager(character);
-        var adventureTask = adventureManager.RunAsync();
-
-        _ = Task.Run(() =>
-        {
-            while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    var key = Console.ReadKey(true).Key;
-                    if (key == ConsoleKey.P)
-                    {
-                        adventureManager.TogglePause();
-                    }
-                }
-
-                Thread.Sleep(100);
-            }
-        });
-
-        await adventureTask;
+        return character;
     }
+
+    private static Character CreateNewCharacter()
+    {
+        var character = CharacterGenerator.Generate();
+        var weapon = WeaponFactory.CreateRandom();
+        character.Inventory.SetStartingInventory(weapon, 10);
+        return character;
+    }
+
 }

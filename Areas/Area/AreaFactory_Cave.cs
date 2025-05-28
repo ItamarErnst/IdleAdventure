@@ -75,11 +75,10 @@ namespace IdleAdventure.Areas
                 .AddExit("You step into a cold, ancient chamber...", "ForgottenCrypt", 0.2)
                 .AddExit("You enter a nearby village.", "Village",0.4)
                 .Build(rand);
-
-            path.AddNext(exit, _ => rand.NextDouble() < 0.1);
             
             cave.AddEvents(
                 new WeightedEvent(path, 10),
+                new WeightedEvent(exit, 2),
                 new WeightedEvent(combatEvent, 3),
                 new WeightedEvent(treasureChest, 1),
                 new WeightedEvent(glowingCrystal, 2),
