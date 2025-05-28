@@ -27,7 +27,9 @@ class ScreenManager
             $"{Colors.Stats}Luck         {character.Luck,2}{Colors.Description}  | Likes: {string.Join(", ", character.Likes)}",
             $"{Colors.Stats}Evasion      {character.Evasion,2}{Colors.Description}  | Dislikes: {string.Join(", ", character.Dislikes)}",
             $"{Colors.HP}HP           {character.CurrentHP,2}/{character.MaxHP,-3}{Colors.Description}",
-            $"{Colors.Magic}Mana           {character.CurrentMP,2}/{character.MaxMana,-3}{Colors.Description}",
+            $"{Colors.Magic}Mana      {character.CurrentMP,2}/{character.MaxMana,-3}{Colors.Description}",
+            $"{Colors.Player}Level       {character.Level,-3}{Colors.Description}",
+            $"{Colors.Player}{character.GetXpBar(character.CurrentXP, character.XPToNextLevel)}{Colors.Description}",
             ""
         };
 

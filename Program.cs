@@ -17,77 +17,53 @@ class Program
 
         while (true)
         {
-            // ✅ If we have a dead character from the previous loop, try to recover
+            bool justRecovered = false;
+
+            // Try to load directly if recovering from death
             if (character != null && character.CurrentHP <= 0)
             {
+                character = StartGame(skipPrompt: true);
                 HandleIdleRecovery(character);
 
                 if (character.CurrentHP > 0)
                 {
-                    // ✅ Player just recovered — skip character creation
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("=== Welcome back to the Idle Adventure! ===");
-                    Console.ResetColor();
+                    ColorText.WriteLine("💀 You have recovered from death and are ready to continue!");
+                    justRecovered = true;
+                }
+            }
+            else
+            {
+                character = StartGame(); // with menu
+                HandleIdleRecovery(character);
 
-                    var screenManager = new ScreenManager();
-                    screenManager.ShowCharacterInfo(character);
-
-                    var adventureManager = new AdventureManager(character);
-                    var adventureTask = adventureManager.RunAsync();
-
-                    bool isDead = false;
-                    AdventureManager.OnPlayerDeath += () => isDead = true;
-
-                    _ = Task.Run(() =>
-                    {
-                        while (!isDead)
-                        {
-                            if (Console.KeyAvailable)
-                            {
-                                var key = Console.ReadKey(true).Key;
-                                if (key == ConsoleKey.P)
-                                {
-                                    isPaused = !isPaused;
-                                    adventureManager.TogglePause();
-                                    if (isPaused)
-                                    {
-                                        screenManager.ShowCharacterInfo(character);
-                                    }
-                                }
-                            }
-
-                            Thread.Sleep(100);
-                        }
-                    });
-
-                    await adventureTask;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n☠ You have died! Preparing to recover...");
-                    Console.ResetColor();
-
-                    continue; // next loop will recover or start new
+                if (character.CurrentHP <= 0)
+                {
+                    // Already dead, recovery countdown will run inside HandleIdleRecovery
+                    SaveData.SaveGame(character);
+                    continue; // go to next loop when done recovering
                 }
             }
 
-            // ✅ Otherwise start from scratch
-            character = StartGame();
             SaveData.SaveGame(character);
+            var screenManager = new ScreenManager();
 
-            var screen = new ScreenManager();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("=== Welcome to the Idle Adventure! ===");
-            Console.ResetColor();
-            screen.ShowCharacterInfo(character);
+            if (!justRecovered)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("=== Welcome to the Idle Adventure! ===");
+                Console.ResetColor();
+                screenManager.ShowCharacterInfo(character);
+            }
+            
+            var adventureManager = new AdventureManager(character);
+            var adventureTask = adventureManager.RunAsync();
 
-            var manager = new AdventureManager(character);
-            var task = manager.RunAsync();
-
-            bool dead = false;
-            AdventureManager.OnPlayerDeath += () => dead = true;
+            bool isDead = false;
+            AdventureManager.OnPlayerDeath += () => isDead = true;
 
             _ = Task.Run(() =>
             {
-                while (!dead)
+                while (!isDead)
                 {
                     if (Console.KeyAvailable)
                     {
@@ -95,10 +71,10 @@ class Program
                         if (key == ConsoleKey.P)
                         {
                             isPaused = !isPaused;
-                            manager.TogglePause();
+                            adventureManager.TogglePause();
                             if (isPaused)
                             {
-                                screen.ShowCharacterInfo(character);
+                                screenManager.ShowCharacterInfo(character);
                             }
                         }
                     }
@@ -107,44 +83,58 @@ class Program
                 }
             });
 
-            await task;
+            await adventureTask;
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("\n☠ You have died! Preparing to recover...");
+            Console.WriteLine("\n☠ You have died! Preparing recovery...");
             Console.ResetColor();
+
+            character.LastDeathTime = DateTime.UtcNow;
+            SaveData.SaveGame(character);
         }
     }
-
-
-    private static Character StartGame()
+    private static Character StartGame(bool skipPrompt = false)
     {
-        ShowStartMessage();
-        ConsoleKey choice = Console.ReadKey(true).Key;
+        if (!skipPrompt)
+        {
+            ShowStartMessage();
+            ConsoleKey choice = Console.ReadKey(true).Key;
 
-        Character character = (choice == ConsoleKey.L && File.Exists(SaveData.SaveFilePath))
-            ? TryLoadGame()
-            : CreateNewCharacter();
+            if (choice == ConsoleKey.L && File.Exists(SaveData.SaveFilePath))
+            {
+                var loaded = TryLoadGame();
 
-        HandleIdleRecovery(character);
-        return character;
+                if (loaded.CurrentHP <= 0)
+                {
+                    Console.WriteLine("🕯 Your character is dead but can still recover...");
+                }
+
+                return loaded;
+            }
+
+            return CreateNewCharacter();
+        }
+
+        return TryLoadGame(false);
     }
 
+    
     private static void ShowStartMessage()
     {
-        Console.WriteLine("Welcome to Idle Adventure!");
-        Console.WriteLine("[L]oad game or [N]ew game?");
+        ColorText.WriteLine("Welcome to Idle Adventure!");
+        ColorText.WriteLine("[L]oad game or [N]ew game?");
     }
 
-    private static Character TryLoadGame()
+    private static Character TryLoadGame(bool display_load_message = true)
     {
         var loaded = SaveData.LoadGame();
         if (loaded != null)
         {
-            Console.WriteLine("Game loaded successfully!");
+            if(display_load_message) ColorText.WriteLine("Game loaded successfully!");
             return loaded;
         }
 
-        Console.WriteLine("Failed to load game. Starting new...");
+        ColorText.WriteLine("Failed to load game. Starting new...");
         return CreateNewCharacter();
     }
 
@@ -177,8 +167,7 @@ class Program
     {
         int msgLine = Console.CursorTop; // Capture current line to print from
 
-        Console.WriteLine("🪦 You are recovering... Please wait.");
-        Console.WriteLine(); // Placeholder for countdown
+        ColorText.WriteLine("🪦 You are recovering... Please wait.");
 
         while (true)
         {
@@ -191,17 +180,16 @@ class Program
             {
                 FullyHealCharacter(character);
                 Console.SetCursorPosition(0, msgLine + 1);
-                Console.WriteLine("💪 You feel your strength return! You are fully healed.       ");
+                ColorText.WriteLine("💪 You feel your strength return! You are fully healed.       ");
                 Thread.Sleep(1500);
                 break;
             }
 
             Console.SetCursorPosition(0, msgLine + 1); // Line after the message
-            Console.Write($"⏳ Time remaining: {timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}       ");
+            ColorText.Write($"⏳ Time remaining: {timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}       ");
             Thread.Sleep(1000);
         }
     }
-
     
     private static Character CreateNewCharacter()
     {
@@ -212,5 +200,4 @@ class Program
         
         return character;
     }
-
 }

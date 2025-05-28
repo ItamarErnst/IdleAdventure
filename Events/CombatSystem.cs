@@ -14,9 +14,9 @@ public static class CombatSystem
         int turn = 1;
 
         Thread.Sleep(GlobalTimer.EventTimer);
-        ColorText.WriteLine(enemy.EncounterText, Colors.Description);
+        ColorText.WriteLine($"{Colors.Bold}{enemy.EncounterText}", Colors.Description);
         Thread.Sleep(GlobalTimer.EventTimer);
-        ColorText.WriteLine($"Combat starts with {enemy.Name}!",Colors.Description);
+        ColorText.WriteLine($"Combat starts with {Colors.Bold}{enemy.Name}!",Colors.Damage);
 
         while (enemy.HP > 0 && character.CurrentHP > 0)
         {
@@ -61,7 +61,7 @@ public static class CombatSystem
 
                 ColorText.Write($"{enemy.Name} {enemyAttack} ", Colors.Description);
                 ColorText.Write($"{enemyDamage}", Colors.Damage);
-                ColorText.WriteLine($" dmg. ❤️ Your HP: {Math.Max(character.CurrentHP, 0)}", Colors.HP);
+                ColorText.WriteLine($" dmg. ❤ Your HP: {Math.Max(character.CurrentHP, 0)}", Colors.HP);
             }
 
             turn++;

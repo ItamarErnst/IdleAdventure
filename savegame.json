@@ -1,67 +1,65 @@
 {
   "Character": {
-    "CurrentArea": "DarkCave",
-    "LastDeathTime": "2025-05-28T16:33:40.8406069Z",
-    "Level": 2,
-    "CurrentXP": 47,
-    "XPToNextLevel": 200,
-    "Name": "Silas",
-    "Gender": "Fluid",
-    "Height": 164,
-    "Weight": 103,
-    "BodyType": "Average",
-    "Profession": "Hunter",
+    "CurrentArea": "Shore",
+    "LastDeathTime": "2025-05-28T19:42:28.5804438+02:00",
+    "Level": 1,
+    "CurrentXP": 0,
+    "XPToNextLevel": 100,
+    "Name": "Aeris",
+    "Gender": "Other",
+    "Height": 155,
+    "Weight": 102,
+    "BodyType": "Lithe",
+    "Profession": "Wizard",
     "Likes": [
-      "flowers",
-      "cake"
+      "gold",
+      "cats"
     ],
     "Dislikes": [
-      "dust",
-      "heat"
+      "noise",
+      "cold"
     ],
-    "CurrentHP": 0,
-    "CurrentMP": 2,
-    "MaxHP": 24,
-    "MaxMana": 2,
-    "Strength": 7,
-    "Agility": 5,
-    "Endurance": 11,
+    "CurrentHP": 28,
+    "CurrentMP": 17,
+    "MaxHP": 28,
+    "MaxMana": 17,
+    "Strength": 10,
+    "Agility": 3,
+    "Endurance": 6,
     "Intelligence": 10,
-    "Charisma": 10,
+    "Charisma": 9,
     "Perception": 3,
-    "Luck": 10,
-    "Evasion": 6,
+    "Luck": 3,
+    "Evasion": 7,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Unarmed",
-        "MinDamage": 1,
-        "MaxDamage": 3,
-        "MissChance": 0.1511002690004176,
-        "CritChance": 0.0765727355869938,
+        "Name": "Twin Blades",
+        "MinDamage": 3,
+        "MaxDamage": 4,
+        "MissChance": 0.06814286973066601,
+        "CritChance": 0.30612620733146606,
         "AttackDescriptions": [
-          "throws a desperate punch",
-          "kicks awkwardly",
-          "flails wildly"
+          "slashes in a quick combo",
+          "cuts with twin arcs",
+          "whirls around furiously"
         ]
       },
-      "Gold": 50,
+      "Gold": 10,
       "weapons": [
         {
-          "Name": "Unarmed",
-          "MinDamage": 1,
-          "MaxDamage": 3,
-          "MissChance": 0.1511002690004176,
-          "CritChance": 0.0765727355869938,
+          "Name": "Twin Blades",
+          "MinDamage": 3,
+          "MaxDamage": 4,
+          "MissChance": 0.06814286973066601,
+          "CritChance": 0.30612620733146606,
           "AttackDescriptions": [
-            "throws a desperate punch",
-            "kicks awkwardly",
-            "flails wildly"
+            "slashes in a quick combo",
+            "cuts with twin arcs",
+            "whirls around furiously"
           ]
         }
       ],
-      "items": {
-        "Enchanted Herb": 1
-      }
+      "items": {}
     }
   }
 }

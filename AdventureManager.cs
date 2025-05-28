@@ -42,6 +42,7 @@ public class AdventureManager
     public async Task RunAsync()
     {
         AdventureEvent? currentEvent = null;
+        currentAreaName = character.CurrentArea;
 
         while (character.CurrentHP > 0)
         {

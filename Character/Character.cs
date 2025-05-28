@@ -63,8 +63,8 @@ public class Character
             CurrentXP -= XPToNextLevel;
             LevelUp();
         }
-
-        DrawXPBar(CurrentXP, XPToNextLevel);
+        
+        ColorText.WriteLine(GetXpBar(CurrentXP, XPToNextLevel), Colors.Player);
     }
 
     private void LevelUp()
@@ -99,21 +99,15 @@ public class Character
         ColorText.WriteLine($"+{points} stat points distributed!", Colors.Stats);
     }
     
-    private void DrawXPBar(int current, int max, int barWidth = 40)
+    public string GetXpBar(int current, int max, int barWidth = 40)
     {
         double ratio = (double)current / max;
         int filled = (int)(ratio * barWidth);
-        int empty = barWidth - filled;
-
-        string filledPart = new string('█', filled);
-        string emptyPart = new string('░', empty);
         string percent = $"{(int)(ratio * 100)}%";
 
-        // Center percentage in the bar
         int totalBarLength = barWidth;
         int percentStart = (barWidth - percent.Length) / 2;
 
-        // Build bar string with percentage embedded
         var bar = new StringBuilder();
         for (int i = 0; i < totalBarLength; i++)
         {
@@ -128,7 +122,7 @@ public class Character
             }
         }
 
-        ColorText.WriteLine($"[{bar}]", Colors.Player);
+        return $"[{bar}]";
     }
 
     
