@@ -1,4 +1,5 @@
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -41,6 +42,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.desert)
                 .WithRareDrop(new AdventureEvent("In the sand, you uncover a golden scorpion idol.", c =>
                     c.Inventory.AddItem("Scorpion Idol"))
                 {

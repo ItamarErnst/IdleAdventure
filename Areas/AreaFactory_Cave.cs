@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -45,6 +46,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.caves)
                 .OnWin(c => { })
                 .WithRareDrop(new AdventureEvent("You uncover a treasure chest!", c => c.Inventory.AddGold(50))
                 {

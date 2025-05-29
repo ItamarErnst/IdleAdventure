@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -45,6 +46,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.forest)
                 .WithRareDrop(new AdventureEvent("Tucked within the roots of an old tree, you find an ancient bark talisman.", c =>
                     c.Inventory.AddItem("Bark Talisman"))
                 {

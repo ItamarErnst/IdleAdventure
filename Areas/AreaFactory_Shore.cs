@@ -1,3 +1,5 @@
+using IdleAdventure.Enemy;
+
 namespace IdleAdventure.Areas;
 
 public class AreaFactory_Shore : IAreaFactory
@@ -49,6 +51,7 @@ public class AreaFactory_Shore : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
+                .SetEnemies(AreaEnemies.shore)
             .WithRareDrop(new AdventureEvent(
                 "You find a barnacle-covered coin etched with unknown symbols.",
                 c => c.Inventory.AddItem("Ancient Coin"))

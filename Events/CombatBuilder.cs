@@ -1,19 +1,21 @@
 using IdleAdventure.Areas;
 using IdleAdventure;
+using IdleAdventure.Enemy;
 
 public class CombatBuilder
 {
-    private Func<Enemy> _enemyFactory = EnemyFactory.CreateRandom;
+    private List<(string name, List<string> attacks, string encounter, string death, string win)> _enemies = AreaEnemies.meadow;
     private Action<Character>? _onWinAction;
     private Action<Character>? _onLoseAction;
     private readonly List<AdventureEvent> _extraWinEvents = new();
 
-    public CombatBuilder WithEnemy(Func<Enemy> factory)
+    public CombatBuilder SetEnemies(
+        List<(string name, List<string> attacks, string encounter, string death, string win)> enemies)
     {
-        _enemyFactory = factory;
+        _enemies = enemies;
         return this;
     }
-
+    
     public CombatBuilder OnWin(Action<Character> winAction)
     {
         _onWinAction = winAction;
@@ -39,7 +41,7 @@ public class CombatBuilder
         return EventBuilder
             .FromAction(character =>
             {
-                var enemy = _enemyFactory();
+                var enemy = EnemyFactory.CreateRandom(_enemies);
 
                 var onWin = new AdventureEvent(enemy.DeathText,
                     _onWinAction ?? (_ => { }),

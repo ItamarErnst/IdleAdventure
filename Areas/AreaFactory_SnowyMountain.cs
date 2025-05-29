@@ -1,4 +1,5 @@
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -46,6 +47,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.snowyMountain)
                 .WithRareDrop(new AdventureEvent("Buried in the snow, you find an ancient frost crystal.", c =>
                     c.Inventory.AddItem("Frost Crystal"))
                 {

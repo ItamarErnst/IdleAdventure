@@ -76,7 +76,7 @@ public static class EnemyFactory
         )
     };
 
-    public static Enemy CreateRandom()
+    public static Enemy CreateRandom(List<(string name, List<string> attacks, string encounter, string death, string win)> templates)
     {
         var (name, attacks, encounter, death, win) = templates[rand.Next(templates.Count)];
 
@@ -107,7 +107,6 @@ public static class EnemyFactory
             criticalHitChance
         );
     }
-    
     
     public static Enemy CreateSpecific(string name)
     {

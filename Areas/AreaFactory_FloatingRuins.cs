@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -43,6 +44,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.ruins)
                 .WithRareDrop(new AdventureEvent("You find a floating orb pulsing with ancient energy.", c =>
                     c.Inventory.AddItem("Arcane Orb"))
                 {

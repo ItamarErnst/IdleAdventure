@@ -1,6 +1,7 @@
 
 
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -43,6 +44,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.swamp)
                 .WithRareDrop(new AdventureEvent("In the reeds, you find a glistening swamp pearl.", c =>
                     c.Inventory.AddItem("Swamp Pearl"))
                 {

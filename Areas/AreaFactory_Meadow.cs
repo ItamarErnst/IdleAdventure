@@ -1,3 +1,5 @@
+using IdleAdventure.Enemy;
+
 namespace IdleAdventure.Areas;
 
 public class AreaFactory_Meadow : IAreaFactory
@@ -53,6 +55,7 @@ public class AreaFactory_Meadow : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
+                .SetEnemies(AreaEnemies.meadow)
             .WithRareDrop(new AdventureEvent(
                 "Among the tall grass, you uncover a delicate flower glowing faintly.",
                 c => c.Inventory.AddItem("Luminous Petal"))

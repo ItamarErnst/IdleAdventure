@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using IdleAdventure.Areas;
+using IdleAdventure.Enemy;
 
 namespace IdleAdventure.AreaFactories
 {
@@ -44,6 +45,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
+                .SetEnemies(AreaEnemies.crypt)
                 .WithRareDrop(new AdventureEvent("You find a rare obsidian pendant hidden in the bone pile.", c =>
                     c.Inventory.AddItem("Obsidian Pendant"))
                 {

@@ -12,27 +12,6 @@ namespace IdleAdventure
             return ansiRegex.Replace(input, "").Length;
         }
 
-        /// <summary>Prints centered text based on console width.</summary>
-        public static void WriteCentered(string text)
-        {
-            int width = Console.WindowWidth;
-            int padding = (width - VisibleLength(text)) / 2;
-            Console.WriteLine(new string(' ', Math.Max(0, padding)) + text);
-        }
-
-        /// <summary>Draws a horizontal line across the terminal.</summary>
-        public static void DrawSeparator(char character = '─')
-        {
-            Console.WriteLine(new string(character, Console.WindowWidth));
-        }
-
-        /// <summary>Draws a colored horizontal line.</summary>
-        public static void DrawFancySeparator(string color = Colors.System)
-        {
-            string bar = $"{color}{new string('═', Console.WindowWidth)}{Colors.Reset}";
-            Console.WriteLine(bar);
-        }
-
         /// <summary>Draws a box around a list of strings (with optional border color).</summary>
         public static void DrawBox(List<string> lines, string borderColor)
         {
@@ -55,6 +34,29 @@ namespace IdleAdventure
             }
             Console.WriteLine(bottom);
         }
+        
+        /// <summary>Prints centered text based on console width.</summary>
+        public static void WriteCentered(string text)
+        {
+            int width = Console.WindowWidth;
+            int padding = (width - VisibleLength(text)) / 2;
+            Console.WriteLine(new string(' ', Math.Max(0, padding)) + text);
+        }
+
+        /// <summary>Draws a horizontal line across the terminal.</summary>
+        public static void DrawSeparator(char character = '─')
+        {
+            Console.WriteLine(new string(character, Console.WindowWidth));
+        }
+
+        /// <summary>Draws a colored horizontal line.</summary>
+        public static void DrawFancySeparator(string color = Colors.System)
+        {
+            string bar = $"{color}{new string('═', Console.WindowWidth)}{Colors.Reset}";
+            Console.WriteLine(bar);
+        }
+
+        
 
         /// <summary>Writes text one character at a time (typewriter effect).</summary>
         public static void WriteWithDelay(string text, int delayMs = 30)

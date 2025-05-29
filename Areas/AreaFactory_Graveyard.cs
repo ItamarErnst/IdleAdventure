@@ -1,3 +1,5 @@
+using IdleAdventure.Enemy;
+
 namespace IdleAdventure.Areas;
 
 public class AreaFactory_Graveyard : IAreaFactory
@@ -50,6 +52,7 @@ public class AreaFactory_Graveyard : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
+                .SetEnemies(AreaEnemies.graveyard)
             .WithRareDrop(new AdventureEvent(
                 "Beneath the skeletal remains, you find a tarnished silver amulet.",
                 c => c.Inventory.AddItem("Grave Amulet"))
