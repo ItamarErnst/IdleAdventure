@@ -8,7 +8,9 @@ public class Weapon
     public double MissChance { get; set; }
     public double CritChance { get; set; }
     public List<string> AttackDescriptions { get; set; } = new();
-    
+
+    public Weapon() { }
+
     public Weapon(string name, int minDmg, int maxDmg, double missChance, double critChance, List<string> attackDescs)
     {
         Name = name;

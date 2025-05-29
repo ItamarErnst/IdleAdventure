@@ -99,7 +99,7 @@ public static class CombatSystem
     private static bool EnemyEvadesAttack(Enemy enemy, Character character,bool isCritical)
     {
         var multiplyer = isCritical? 0.5f : 1;
-        var weaponMissChance = character.GetEquippedWeapon().MissChance * multiplyer;
+        var weaponMissChance = (character.GetEquippedWeapon().MissChance / 2) * multiplyer;
         var totalEvasionChance = (enemy.Evasion + (enemy?.DodgeChance ?? 0)) * multiplyer;
         
         if (Random.Shared.NextDouble() < weaponMissChance)

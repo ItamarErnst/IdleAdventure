@@ -97,7 +97,7 @@ public static class WeaponFactory
         double miss = template.MissMin + rand.NextDouble() * (template.MissMax - template.MissMin);
         double crit = template.CritMin + rand.NextDouble() * (template.CritMax - template.CritMin);
 
-        return new Weapon(template.Name, minDmg, maxDmg, miss / 2, crit, template.Descriptions);
+        return new Weapon(template.Name, minDmg, maxDmg, miss, crit, template.Descriptions);
     }
     
     public static Weapon CreateUnarmed()
