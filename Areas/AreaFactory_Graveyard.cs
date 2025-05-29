@@ -50,11 +50,6 @@ public class AreaFactory_Graveyard : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
-            .OnWin(c =>
-            {
-                c.GainXP(rand.Next(2, 6));
-                c.Inventory.AddGold(rand.Next(1, 4));
-            })
             .WithRareDrop(new AdventureEvent(
                 "Beneath the skeletal remains, you find a tarnished silver amulet.",
                 c => c.Inventory.AddItem("Grave Amulet"))

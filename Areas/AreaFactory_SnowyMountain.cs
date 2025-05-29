@@ -46,11 +46,6 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(4, 8));
-                    c.Inventory.AddGold(rand.Next(3, 7));
-                })
                 .WithRareDrop(new AdventureEvent("Buried in the snow, you find an ancient frost crystal.", c =>
                     c.Inventory.AddItem("Frost Crystal"))
                 {

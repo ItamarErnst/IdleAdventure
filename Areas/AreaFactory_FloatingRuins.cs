@@ -43,11 +43,6 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(5, 10));
-                    c.Inventory.AddGold(rand.Next(5, 10));
-                })
                 .WithRareDrop(new AdventureEvent("You find a floating orb pulsing with ancient energy.", c =>
                     c.Inventory.AddItem("Arcane Orb"))
                 {

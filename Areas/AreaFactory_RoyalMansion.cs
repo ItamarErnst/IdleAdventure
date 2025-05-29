@@ -50,11 +50,6 @@ public class AreaFactory_RoyalMansion : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
-            .OnWin(c =>
-            {
-                c.GainXP(rand.Next(1, 4));
-                c.Inventory.AddGold(rand.Next(3, 6));
-            })
             .WithRareDrop(new AdventureEvent(
                 "You pry open a drawer and find a Royal Insignia ring.",
                 c => c.Inventory.AddItem("Royal Insignia"))

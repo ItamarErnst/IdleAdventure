@@ -49,11 +49,6 @@ public class AreaFactory_Shore : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
-            .OnWin(c =>
-            {
-                c.GainXP(rand.Next(1, 4));
-                c.Inventory.AddGold(rand.Next(2, 5));
-            })
             .WithRareDrop(new AdventureEvent(
                 "You find a barnacle-covered coin etched with unknown symbols.",
                 c => c.Inventory.AddItem("Ancient Coin"))

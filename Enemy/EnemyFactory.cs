@@ -83,12 +83,12 @@ public static class EnemyFactory
         int hp = rand.Next(10, 80);
         int mana = rand.Next(0, 10);
         int evasion = rand.Next(-5, 10);
-        int minDmg = rand.Next(3, 10);
-        int maxDmg = rand.Next(minDmg + 2, minDmg + 5);
+        int minDmg = rand.Next(1, 5);
+        int maxDmg = rand.Next(minDmg + 1, minDmg + 5);
     
         // New random stats
-        int dodgeChance = rand.Next(0, 7);          // 3-7% dodge chance
-        int physicalDefense = rand.Next(-5, 11);     // 5-10 physical defense
+        int dodgeChance = rand.Next(0, 5);          // 3-7% dodge chance
+        int physicalDefense = rand.Next(-10, 10);     // 5-10 physical defense
         int criticalHitChance = rand.Next(0, 6);    // 3-5% crit chance
 
         return new Enemy(

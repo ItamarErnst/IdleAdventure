@@ -15,7 +15,7 @@ public class Enemy
     public int PhysicalDefense { get; }
     public bool IsCriticalHit() => Random.Shared.Next(100) < CriticalHitChance;
     public int CriticalHitChance { get; }
-    public int XPValue { get; }  // Base XP awarded when defeated
+    public int XPValue { get; } = 3;
 
     public string EncounterText { get; }
     public string DeathText { get; }

@@ -53,11 +53,6 @@ public class AreaFactory_Meadow : IAreaFactory
     private AdventureEvent CreateCombatEvent()
     {
         return new CombatBuilder()
-            .OnWin(c =>
-            {
-                c.GainXP(rand.Next(1, 5));
-                c.Inventory.AddGold(rand.Next(1, 5));
-            })
             .WithRareDrop(new AdventureEvent(
                 "Among the tall grass, you uncover a delicate flower glowing faintly.",
                 c => c.Inventory.AddItem("Luminous Petal"))

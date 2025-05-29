@@ -45,11 +45,7 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(3, 4));
-                    c.Inventory.AddGold(rand.Next(1, 6));
-                })
+                .OnWin(c => { })
                 .WithRareDrop(new AdventureEvent("You uncover a treasure chest!", c => c.Inventory.AddGold(50))
                 {
                     Eligibility = _ => rand.NextDouble() < 0.02

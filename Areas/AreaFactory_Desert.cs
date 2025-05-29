@@ -41,11 +41,6 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(3, 6));
-                    c.Inventory.AddGold(rand.Next(2, 6));
-                })
                 .WithRareDrop(new AdventureEvent("In the sand, you uncover a golden scorpion idol.", c =>
                     c.Inventory.AddItem("Scorpion Idol"))
                 {

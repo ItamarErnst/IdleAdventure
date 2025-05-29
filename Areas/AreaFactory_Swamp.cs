@@ -43,11 +43,6 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(2, 6));
-                    c.Inventory.AddGold(rand.Next(1, 4));
-                })
                 .WithRareDrop(new AdventureEvent("In the reeds, you find a glistening swamp pearl.", c =>
                     c.Inventory.AddItem("Swamp Pearl"))
                 {

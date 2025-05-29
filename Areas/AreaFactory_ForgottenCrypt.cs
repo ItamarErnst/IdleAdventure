@@ -44,11 +44,6 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(4, 8));
-                    c.Inventory.AddGold(rand.Next(5, 10));
-                })
                 .WithRareDrop(new AdventureEvent("You find a rare obsidian pendant hidden in the bone pile.", c =>
                     c.Inventory.AddItem("Obsidian Pendant"))
                 {

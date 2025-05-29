@@ -1,79 +1,79 @@
 {
   "Character": {
     "Stats": {
-      "PhysicalDamageBonus": 2,
+      "PhysicalDamageBonus": 3,
       "DodgeChance": 6,
-      "CriticalHitChance": 3,
-      "MaximumHP": 130,
-      "MaximumMP": 74,
-      "MagicPower": 1.15,
-      "PhysicalDefense": 3,
-      "MagicalDefense": 3,
+      "CriticalHitChance": 1,
+      "MaximumHP": 160,
+      "MaximumMP": 98,
+      "MagicPower": 1.3,
+      "PhysicalDefense": 6,
+      "MagicalDefense": 6,
       "DetectionRadius": 8,
-      "TrapDetectionChance": 5,
-      "StealthLevel": 6,
-      "MerchantPriceModifier": 0.93,
-      "ReputationGainModifier": 3,
-      "PhysicalSynergyBonus": 1,
-      "MagicalSynergyBonus": 1,
-      "CriticalSynergyBonus": 2
+      "TrapDetectionChance": 3,
+      "StealthLevel": 3,
+      "MerchantPriceModifier": 0.96,
+      "ReputationGainModifier": 2,
+      "PhysicalSynergyBonus": 2,
+      "MagicalSynergyBonus": 2,
+      "CriticalSynergyBonus": 0
     },
     "CurrentArea": "ForestShrine",
-    "LastDeathTime": "2025-05-28T20:59:20.8537721Z",
+    "LastDeathTime": "2025-05-29T10:14:01.4305544+02:00",
     "Level": 1,
-    "CurrentXP": 18,
+    "CurrentXP": 33,
     "XPToNextLevel": 100,
     "Name": "Silas",
     "Gender": "Fluid",
-    "Height": 160,
-    "Weight": 115,
+    "Height": 170,
+    "Weight": 89,
     "BodyType": "Slim",
-    "Profession": "Merchant",
+    "Profession": "Bard",
     "Likes": [
-      "flowers",
-      "fame"
+      "weapons",
+      "adventure"
     ],
     "Dislikes": [
-      "heat",
-      "darkness"
+      "darkness",
+      "fish"
     ],
-    "CurrentHP": 0,
-    "CurrentMP": 15,
-    "MaxHP": 46,
-    "MaxMana": 15,
-    "Strength": 4,
-    "Agility": 7,
-    "Endurance": 3,
-    "Intelligence": 3,
-    "Charisma": 7,
+    "CurrentHP": 23,
+    "CurrentMP": 24,
+    "MaxHP": 51,
+    "MaxMana": 24,
+    "Strength": 7,
+    "Agility": 3,
+    "Endurance": 6,
+    "Intelligence": 6,
+    "Charisma": 4,
     "Perception": 4,
-    "Luck": 8,
-    "Evasion": 6,
+    "Luck": 3,
+    "Evasion": 9,
     "Inventory": {
       "EquippedWeapon": {
-        "Name": "Twin Blades",
-        "MinDamage": 3,
+        "Name": "Crystal Wand",
+        "MinDamage": 2,
         "MaxDamage": 5,
-        "MissChance": 0.09196753022211979,
-        "CritChance": 0.3343547926278533,
+        "MissChance": 0.0592904759817911,
+        "CritChance": 0.1777745450556341,
         "AttackDescriptions": [
-          "slashes in a quick combo",
-          "cuts with twin arcs",
-          "whirls around furiously"
+          "channels a shimmering bolt",
+          "casts a beam of focused light",
+          "zaps with crystalline energy"
         ]
       },
-      "Gold": 12,
+      "Gold": 16,
       "weapons": [
         {
-          "Name": "Twin Blades",
-          "MinDamage": 3,
+          "Name": "Crystal Wand",
+          "MinDamage": 2,
           "MaxDamage": 5,
-          "MissChance": 0.09196753022211979,
-          "CritChance": 0.3343547926278533,
+          "MissChance": 0.0592904759817911,
+          "CritChance": 0.1777745450556341,
           "AttackDescriptions": [
-            "slashes in a quick combo",
-            "cuts with twin arcs",
-            "whirls around furiously"
+            "channels a shimmering bolt",
+            "casts a beam of focused light",
+            "zaps with crystalline energy"
           ]
         }
       ],

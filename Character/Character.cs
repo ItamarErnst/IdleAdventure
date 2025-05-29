@@ -5,12 +5,12 @@ namespace IdleAdventure;
 
 public class Character
 {
-    public StatCalculator Stats { get; private set; }
+    public StatCalculator Stats { get; }
 
     public string CurrentArea { get; set; }
     public DateTime? LastDeathTime { get; set; } = DateTime.Now;
-    public int Level { get; private set; } = 1;
-    public int CurrentXP { get; private set; } = 0;
+    public int Level { get; set; } = 1;
+    public int CurrentXP { get; set; } = 0;
     public int XPToNextLevel => Level * 100;
 
     public string Name { get; set; }
@@ -70,6 +70,8 @@ public class Character
     
     public void GainXP(int amount)
     {
+        if(amount < 0) return;
+
         CurrentXP += amount * 3;
         ColorText.WriteLine($"{Colors.Bold}Gained {amount} XP!", Colors.Player);
 

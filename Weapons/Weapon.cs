@@ -7,13 +7,8 @@ public class Weapon
     public int MaxDamage { get; set; }
     public double MissChance { get; set; }
     public double CritChance { get; set; }
-    public List<string> AttackDescriptions { get; set; }
-
-    public Weapon()
-    {
-        AttackDescriptions = new List<string>();
-    }
-
+    public List<string> AttackDescriptions { get; set; } = new();
+    
     public Weapon(string name, int minDmg, int maxDmg, double missChance, double critChance, List<string> attackDescs)
     {
         Name = name;
@@ -22,13 +17,6 @@ public class Weapon
         MissChance = missChance;
         CritChance = critChance;
         AttackDescriptions = attackDescs;
-    }
-
-    public int GetDamage(Random rand, out bool isCrit)
-    {
-        isCrit = rand.NextDouble() < CritChance;
-        int baseDamage = rand.Next(MinDamage, MaxDamage + 1);
-        return isCrit ? baseDamage * 2 : baseDamage;
     }
 
     public string GetRandomAttackDescription(Random rand)

@@ -23,7 +23,7 @@ public class Inventory
     public void AddWeapon(Weapon weapon)
     {
         weapons.Add(weapon);
-        if (EquippedWeapon.Name == "Unarmed")
+        if (EquippedWeapon.Name == "Unarmed" || Random.Shared.NextDouble() < 0.25 || EquippedWeapon.MaxDamage < weapon.MaxDamage)
         {
             EquipWeapon(weapon);
             ColorText.WriteLine($"You equipped {Colors.Magic}{weapon.Name}.", Colors.Item);
@@ -44,10 +44,14 @@ public class Inventory
         {
             items.Add(itemName, 1);
         }
+        
+        ColorText.WriteLine($"You found {Colors.Magic}{itemName}.", Colors.Item);
     }
 
     public void AddGold(int amount)
     {
+        if(amount < 0) return;
+        
         Gold += amount;
         ColorText.WriteLine($"💰 +{amount} gold. Total: {Gold}", Colors.Gold);
     }
@@ -86,5 +90,13 @@ public class Inventory
         }
        
         return false;
+    }
+
+    public void RemoveItem(string item)
+    {
+        if (items.TryGetValue(item, out int count))
+        {
+            count--;
+        }
     }
 }

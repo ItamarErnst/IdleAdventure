@@ -45,11 +45,6 @@ namespace IdleAdventure.AreaFactories
         private AdventureEvent CreateCombatEvent()
         {
             return new CombatBuilder()
-                .OnWin(c =>
-                {
-                    c.GainXP(rand.Next(5, 10));
-                    c.Inventory.AddGold(rand.Next(2, 3));
-                })
                 .WithRareDrop(new AdventureEvent("Tucked within the roots of an old tree, you find an ancient bark talisman.", c =>
                     c.Inventory.AddItem("Bark Talisman"))
                 {

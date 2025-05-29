@@ -181,15 +181,16 @@ class Program
             {
                 FullyHealCharacter(character);
                 Console.SetCursorPosition(0, msgLine + 1);
-                ColorText.WriteLine("💪 You feel your strength return! You are fully healed.       ");
+                ColorText.WriteLine("💪 You feel your strength return! You are fully healed.");
                 Thread.Sleep(1500);
                 break;
             }
 
             Console.SetCursorPosition(0, msgLine + 1); // Line after the message
-            ColorText.Write($"⏳ Time remaining: {timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}       ");
+            ColorText.Write($"⏳ Time remaining: {timeLeft.Minutes:D2}:{timeLeft.Seconds:D2}             ");
             Thread.Sleep(1000);
         }
+        ColorText.WriteLine("");
     }
     
     private static Character CreateNewCharacter()
